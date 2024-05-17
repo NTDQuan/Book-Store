@@ -1,4 +1,4 @@
-package com.cnjava.backend;
+package com.cnjava.book_store;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
