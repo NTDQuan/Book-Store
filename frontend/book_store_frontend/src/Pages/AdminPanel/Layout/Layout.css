@@ -1,0 +1,21 @@
+.Layout {
+    font-family: "Inter", sans-serif;
+    background-color: var(--main-bg);
+    color: var(--main-color)
+}
+
+.container {
+    display: flex;
+}
+
+.menuContainer {
+    width: 250px;
+    min-height: 100vh;
+    padding: 2px 20px;
+    border-right: 2px solid var(--soft-bg);
+}
+
+.contentContainer {
+    padding: 5px 20px;
+    width: 100%;
+}
