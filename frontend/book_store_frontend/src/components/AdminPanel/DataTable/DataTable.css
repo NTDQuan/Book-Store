@@ -1,0 +1,25 @@
+.BookListDataTable .dataGrid {
+    background: white;
+    padding: 20px;
+}
+
+.BookListDataTable .dataGrid .MuiDataGrid-toolbarContainer {
+    flex-direction: row-reverse;
+}
+
+.BookListDataTable .dataGrid img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+}
+
+.BookListDataTable .dataGrid .action {
+    display: flex;
+    gap: 15px;
+}
+
+.BookListDataTable .dataGrid .action img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}

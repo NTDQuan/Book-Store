@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <AdminLayout/>,
     children: [
       {
-        path: "book",
+        path: "books",
         element: <AdminBookContainer/>
       },
       {
