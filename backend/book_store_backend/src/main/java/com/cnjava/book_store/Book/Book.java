@@ -25,12 +25,10 @@ public class Book {
 	private String title;	
 	
 	@JoinColumn(name = "author_id")
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	private Author author;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
+	@ManyToOne()
 	@JoinColumn(name = "category_id")
 	private Category category;
 	private String book_cover;
