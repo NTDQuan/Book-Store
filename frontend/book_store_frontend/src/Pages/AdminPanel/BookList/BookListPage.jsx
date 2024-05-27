@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable.jsx'
 import no_image from '../../../assets/no_book_cover.jpg'
-import './Book.css'
+import './BookListPage.css'
 import { getBooksData } from '../../../service/FetchBookData.js'
 import AddBookModal from '../../../components/AdminPanel/AddModal/AddBookModal/AddBookModal.jsx'
 
@@ -55,7 +55,7 @@ const columns = [
 ];
 
 
-const Book = () => {
+const BookListPage = () => {
   const [bookdata, setBooks] = useState([])
   const [open, setOpen] = useState(false)
 
@@ -86,4 +86,4 @@ const Book = () => {
   )
 }
 
-export default Book
+export default BookListPage

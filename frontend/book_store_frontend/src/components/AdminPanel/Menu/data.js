@@ -1,5 +1,6 @@
 import homeIcon from "../../../assets/home_icon.svg"
 import bookIcon from "../../../assets/book_list_admin_icon.svg"
+import authorIcon from "../../../assets/author_list_icon.svg"
 
 export const menu = [
     {
@@ -23,6 +24,12 @@ export const menu = [
                 title: "Books",
                 url: "/admin/books",
                 icon: bookIcon
+            },
+            {
+                id: 2,
+                title: "Authors",
+                url: "/admin/authors",
+                icon: authorIcon
             }
         ]
     }
