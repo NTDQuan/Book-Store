@@ -11,6 +11,7 @@ public class BookDTO {
 	private String book_cover;
 	private int stock;
 	private String description;
+	private Double price;
 	public long getId() {
 		return id;
 	}
@@ -52,6 +53,12 @@ public class BookDTO {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	

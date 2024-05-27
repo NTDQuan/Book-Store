@@ -65,6 +65,7 @@ public class BookServiceImp implements BookService {
 			book.setStock(updatedBook.getStock());
 			book.setDescription(updatedBook.getDescription());
 			book.setBook_cover(updatedBook.getBook_cover());
+			book.setPrice(updatedBook.getPrice());
 			bookRepository.save(book);
 			return true;
 		}

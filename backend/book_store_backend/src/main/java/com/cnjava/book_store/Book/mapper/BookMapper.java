@@ -15,6 +15,7 @@ public class BookMapper {
 		bookDTO.setBook_cover(book.getBook_cover());
 		bookDTO.setDescription(book.getDescription());
 		bookDTO.setStock(book.getStock());
+		bookDTO.setPrice(book.getPrice());
 		return bookDTO;
 	}
 }

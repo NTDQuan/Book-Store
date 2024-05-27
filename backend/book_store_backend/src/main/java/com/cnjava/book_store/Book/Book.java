@@ -34,7 +34,7 @@ public class Book {
 	private String book_cover;
 	private int stock;
 	private String description;
-	
+	private Double price;
 	public Book() {
 		
 	}
@@ -92,6 +92,16 @@ public class Book {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	
 	
 	
 }

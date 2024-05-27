@@ -3,6 +3,7 @@ import DataTable from '../../../components/AdminPanel/DataTable/DataTable.jsx'
 import no_image from '../../../assets/no_book_cover.jpg'
 import './Book.css'
 import { getBooksData } from '../../../service/FetchBookData.js'
+import AddBookModal from '../../../components/AdminPanel/AddModal/AddBookModal/AddBookModal.jsx'
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -19,19 +20,22 @@ const columns = [
   {
     field: 'title',
     headerName: 'Title',
-    width: 500,
+    width: 460,
+    type: String,
     editable: false,
   },
   {
     field: 'author',
     headerName: 'Author',
     width: 200,
+    type: String,
     editable: false,
   },
   {
     field: 'category',
     headerName: 'Category',
-    width: 200,
+    width: 160,
+    type: String,
     editable: false,
   },
   {
@@ -40,16 +44,21 @@ const columns = [
     type: Number,
     width: 160,
     editable: false
+  },
+  {
+    field: 'price',
+    headerName: 'Price',
+    type: Number,
+    width: 160,
+    editable: false
   }
-];
-
-const rows = [
-  { id: 1, title: 'Konosuba', author: 'Kwan', category: 'comedy', stock: 100},
 ];
 
 
 const Book = () => {
   const [bookdata, setBooks] = useState([])
+  const [open, setOpen] = useState(false)
+
   const getBooks = async() => {
     try{
       const data = await getBooksData();
@@ -69,9 +78,10 @@ const Book = () => {
     <div className='books'>
       <div className='info'>
         <h1>Books</h1>
-        <button>Add New Book</button>
+        <button onClick={() => setOpen(true)}>Add New Book</button>
       </div>
       <DataTable slug="books" columns={columns} rows={bookdata}/>
+      {open && <AddBookModal slug="book" columns={columns} setOpen={setOpen}/> }
     </div>
   )
 }
