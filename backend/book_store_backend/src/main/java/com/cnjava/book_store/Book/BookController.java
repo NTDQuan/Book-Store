@@ -1,6 +1,8 @@
 package com.cnjava.book_store.Book;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,9 +45,10 @@ public class BookController {
 	}	
 	
 	@PostMapping()
-	public ResponseEntity<String> addNewBook(@RequestBody Book newBook) {
+	public ResponseEntity<Map<String, String>> addNewBook(@RequestBody Book newBook) {
 		bookService.createBook(newBook);
-		return new ResponseEntity<>("Book added successfully", HttpStatus.OK);
+		Map<String, String> response = Collections.singletonMap("message", "Book added successfully");
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/books/{id}")

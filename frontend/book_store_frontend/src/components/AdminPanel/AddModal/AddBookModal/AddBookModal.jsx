@@ -1,11 +1,21 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
+import { getCategoriesData } from '../../../../service/FetchCategoryData'
+import { getAuthorsData } from '../../../../service/FetchAuthorData'
+import { addBook } from '../../../../service/BookService'
 import './AddBookModal.css'
 
 const AddBookModal = (props) => {
-  const { slug, columns, setOpen } = props;
+  const { slug, setOpen, refreshBooks } = props;
   const [file, setFile] = useState();
+  const [categories, setCategories] = useState([]);
+  const [authors, setauthors] = useState([]) 
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    getCategoriesData().then(data => setCategories(data))
+    getAuthorsData().then(data => setauthors(data))
+  }, [])
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
 
@@ -20,9 +30,27 @@ const AddBookModal = (props) => {
       
     }
 
-    const json = JSON.stringify(formObject);
-    console.log(json);
+    const jsonData = {
+      title: formObject.title,
+      author: { id: parseInt(formObject.author) },
+      category: { id: parseInt(formObject.category) },
+      book_cover: file ? file.name : null,
+      stock: parseInt(formObject.stock),
+      description: formObject.description || "No description provided",
+      price: parseInt(formObject.price),
+    };
+    console.log(jsonData);
 
+    try {
+      const response = await addBook(jsonData);
+      // Handle success (e.g., close modal, show success message, etc.)
+      setOpen(false);
+      refreshBooks();
+      alert('Book added successfully')
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error (e.g., show error message, etc.)
+    }
   }
 
   const handleFileChange = (e) => {
@@ -53,12 +81,18 @@ const AddBookModal = (props) => {
             <label>{'Author'}</label>
             <select className='input' name='author' required>
               <option value="">--Select author--</option>
+              {authors.map(author => (
+                <option key={author.id} value={author.id}>{author.fullName}</option>
+              ))}
             </select>
           </div>
           <div className='item'>
             <label>{'Category'}</label>
             <select className='input' name='category' required>
-              <option value="">--Select author--</option>
+              <option value="">--Select category--</option>
+              {categories.map(category => (
+                <option key={category.id} value={category.id}>{category.name}</option>
+              ))}
             </select>
           </div>
           <div className='item'>

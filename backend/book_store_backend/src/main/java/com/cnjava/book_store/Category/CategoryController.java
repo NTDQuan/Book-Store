@@ -1,6 +1,8 @@
 package com.cnjava.book_store.Category;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,9 +43,10 @@ public class CategoryController {
 	}	
 	
 	@PostMapping()
-	public ResponseEntity<String> addNewCategory(@RequestBody Category newCategory) {
+	public ResponseEntity<Map<String, String>> addNewCategory(@RequestBody Category newCategory) {
 		categoryService.createCategory(newCategory);
-		return new ResponseEntity<>("Category added successfully", HttpStatus.OK);
+		Map<String, String> response = Collections.singletonMap("message", "Category added successfully");
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/categories/{id}")

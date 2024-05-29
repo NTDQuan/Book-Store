@@ -42,7 +42,7 @@ const BookListDataTable = (props) => {
                 initialState={{
                     pagination: {
                         paginationModel: {
-                            pageSize: 5,
+                            pageSize: 10,
                         },
                     },
                 }}
@@ -53,7 +53,7 @@ const BookListDataTable = (props) => {
                         quickFilterProps: { debounceMs: 500}
                     }
                 }}
-                pageSizeOptions={[5]}
+                pageSizeOptions={[10]}
                 checkboxSelection
                 disableRowSelectionOnClick
                 disableColumnFilter

@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable.jsx'
 import no_image from '../../../assets/no_book_cover.jpg'
 import './BookListPage.css'
-import { getBooksData } from '../../../service/FetchBookData.js'
+import { getBooksData } from '../../../service/BookService.js'
 import AddBookModal from '../../../components/AdminPanel/AddModal/AddBookModal/AddBookModal.jsx'
 
 const columns = [
@@ -73,6 +73,10 @@ const BookListPage = () => {
     getBooks()
   }, [])
 
+  const refreshBooks = () => {
+    getBooks();
+  };
+
 
   return (
     <div className='books'>
@@ -81,7 +85,7 @@ const BookListPage = () => {
         <button onClick={() => setOpen(true)}>Add New Book</button>
       </div>
       <DataTable slug="books" columns={columns} rows={bookdata}/>
-      {open && <AddBookModal slug="book" columns={columns} setOpen={setOpen}/> }
+      {open && <AddBookModal slug="book" columns={columns} setOpen={setOpen} refreshBooks={refreshBooks}/> }
     </div>
   )
 }
