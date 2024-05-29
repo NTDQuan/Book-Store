@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AdminLayout from "./Pages/AdminPanel/Layout/Layout"
 import AdminBookContainer from "./Pages/AdminPanel/Book/Book"
 import AdminHomeContainer from "./Pages/AdminPanel/Home/Home"
+import StaffListPage  from "./Pages/AdminPanel/StaffList/StaffListPage";
 import "./Styles/global.css"
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <AdminHomeContainer/>
+      },
+       {
+        path: "staff", // Route for Staff
+        element: <StaffListPage/>
       }
     ],
   }
