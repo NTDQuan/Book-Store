@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable.jsx'
-import { getCategoriesData } from '../../../service/FetchCategoryData.js'
+import { getCategoriesData } from '../../../service/CategoryService.js'
 import AddCategoryModal from '../../../components/AdminPanel/AddModal/AddCategoryModal/AddCategoryModal.jsx'
 import './CategoryListPage.css'
 
@@ -17,13 +17,13 @@ const columns = [
 
 
 const CategoryListPage = () => {
-    const [categorydata, setCategorys] = useState([])
+    const [categorydata, setCategories] = useState([])
     const [open, setOpen] = useState(false)
   
-    const getCategorys = async() => {
+    const getCategories = async() => {
       try{
         const data = await getCategoriesData();
-        setCategorys(data);
+        setCategories(data);
         console.log(data)
       } catch (error) {
         console.error('Error fetching data', error)
@@ -31,8 +31,12 @@ const CategoryListPage = () => {
     };
   
     useEffect(() => {
-      getCategorys()
+      getCategories()
     }, [])
+
+    const refreshCategories = () => {
+      getCategories();
+    };
 
     return (
       <div className='categories'>
@@ -41,7 +45,7 @@ const CategoryListPage = () => {
           <button onClick={() => setOpen(true)}>Add New Category</button>
         </div>
         <DataTable slug="categories" columns={columns} rows={categorydata}/>
-        {open && <AddCategoryModal slug="category" columns={columns} setOpen={setOpen}/> }
+        {open && <AddCategoryModal slug="category" columns={columns} setOpen={setOpen} refreshCategories={refreshCategories}/> }
       </div>
     )
   }

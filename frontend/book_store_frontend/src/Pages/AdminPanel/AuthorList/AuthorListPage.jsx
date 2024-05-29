@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable.jsx'
-import { getAuthorsData } from '../../../service/FetchAuthorData.js'
+import { getAuthorsData } from '../../../service/AuthorService.js'
 import AddAuthorModal from '../../../components/AdminPanel/AddModal/AddAuthorModal/AddAuthorModal.jsx'
 import './AuthorListPage.css'
 
@@ -34,6 +34,10 @@ const AuthorListPage = () => {
       getAuthors()
     }, [])
 
+    const refreshAuthors = () => {
+      getAuthors();
+    };
+
     return (
       <div className='authors'>
         <div className='info'>
@@ -41,7 +45,7 @@ const AuthorListPage = () => {
           <button onClick={() => setOpen(true)}>Add New Author</button>
         </div>
         <DataTable slug="authors" columns={columns} rows={authordata}/>
-        {open && <AddAuthorModal slug="author" columns={columns} setOpen={setOpen}/> }
+        {open && <AddAuthorModal slug="author" columns={columns} setOpen={setOpen} refreshAuthors={refreshAuthors}/> }
       </div>
     )
   }

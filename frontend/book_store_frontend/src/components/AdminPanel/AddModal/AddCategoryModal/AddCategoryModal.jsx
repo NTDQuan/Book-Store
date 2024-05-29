@@ -1,10 +1,11 @@
 import React from 'react'
 import './AddCategoryModal.css'
+import { addCategory } from '../../../../service/CategoryService.js'
 
 const AddCategoryModal = (props) => {
-    const { slug, columns, setOpen } = props;
+    const { slug, setOpen, refreshCategories } = props;
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
         //Convert form to json
@@ -12,8 +13,20 @@ const AddCategoryModal = (props) => {
         formData.forEach((value, key) => {
           formObject[key] = value;
         });
-        const json = JSON.stringify(formObject);
-        console.log(json);  
+        const jsonData = {
+            name: formObject.name 
+        }; 
+        try {
+            console.log(formData.fullName)
+            const response = await addCategory(jsonData);
+            // Handle success (e.g., close modal, show success message, etc.)
+            setOpen(false);
+            refreshCategories();
+            alert('Category added successfully')
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error (e.g., show error message, etc.)
+        } 
       }
 
     return (

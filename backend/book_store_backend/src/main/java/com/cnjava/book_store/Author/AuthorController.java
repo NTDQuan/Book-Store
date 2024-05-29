@@ -1,6 +1,8 @@
 package com.cnjava.book_store.Author;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,9 +43,10 @@ public class AuthorController {
 	}	
 	
 	@PostMapping()
-	public ResponseEntity<String> addNewAuthor(@RequestBody Author newAuthor) {
+	public ResponseEntity<Map<String, String>> addNewAuthor(@RequestBody Author newAuthor) {
 		authorService.createAuthor(newAuthor);
-		return new ResponseEntity<>("Author added successfully", HttpStatus.OK);
+		Map<String, String> response = Collections.singletonMap("message", "Author added successfully");
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/authors/{id}")

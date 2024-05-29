@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { getCategoriesData } from '../../../../service/FetchCategoryData'
-import { getAuthorsData } from '../../../../service/FetchAuthorData'
+import { getCategoriesData } from '../../../../service/CategoryService'
+import { getAuthorsData } from '../../../../service/AuthorService'
 import { addBook } from '../../../../service/BookService'
 import './AddBookModal.css'
 
@@ -39,7 +39,6 @@ const AddBookModal = (props) => {
       description: formObject.description || "No description provided",
       price: parseInt(formObject.price),
     };
-    console.log(jsonData);
 
     try {
       const response = await addBook(jsonData);

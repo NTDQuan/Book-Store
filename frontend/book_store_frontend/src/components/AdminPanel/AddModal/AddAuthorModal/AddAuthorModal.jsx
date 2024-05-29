@@ -1,10 +1,11 @@
 import React from 'react'
 import './AddAuthorModal.css'
+import { addAuthor } from '../../../../service/AuthorService'
 
 const AddAuthorModal = (props) => {
-    const { slug, columns, setOpen } = props;
+    const { slug, setOpen, refreshAuthors } = props;
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
         //Convert form to json
@@ -12,8 +13,22 @@ const AddAuthorModal = (props) => {
         formData.forEach((value, key) => {
           formObject[key] = value;
         });
-        const json = JSON.stringify(formObject);
-        console.log(json);  
+
+        const jsonData = {
+            fullName: formObject.fullName 
+        }; 
+
+        try {
+            console.log(formData.fullName)
+            const response = await addAuthor(jsonData);
+            // Handle success (e.g., close modal, show success message, etc.)
+            setOpen(false);
+            refreshAuthors();
+            alert('Book added successfully')
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error (e.g., show error message, etc.)
+        }
       }
 
     return (
