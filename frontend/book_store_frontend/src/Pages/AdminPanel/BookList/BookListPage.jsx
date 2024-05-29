@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable.jsx'
 import no_image from '../../../assets/no_book_cover.jpg'
 import './BookListPage.css'
-import { getBooksData } from '../../../service/BookService.js'
+import { getBooksData, deleteBook } from '../../../service/BookService.js'
 import AddBookModal from '../../../components/AdminPanel/AddModal/AddBookModal/AddBookModal.jsx'
 
 const columns = [
@@ -77,6 +77,16 @@ const BookListPage = () => {
     getBooks();
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await deleteBook(id);
+      refreshBooks();
+      alert('Book deleted succesfully');
+    } catch (error) {
+      console.error('Error deleting book');
+    }
+  };
+
 
   return (
     <div className='books'>
@@ -84,7 +94,7 @@ const BookListPage = () => {
         <h1>Books</h1>
         <button onClick={() => setOpen(true)}>Add New Book</button>
       </div>
-      <DataTable slug="books" columns={columns} rows={bookdata}/>
+      <DataTable slug="books" columns={columns} rows={bookdata} handleDelete={handleDelete}/>
       {open && <AddBookModal slug="book" columns={columns} setOpen={setOpen} refreshBooks={refreshBooks}/> }
     </div>
   )

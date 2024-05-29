@@ -9,6 +9,7 @@ const AddBookModal = (props) => {
   const [file, setFile] = useState();
   const [categories, setCategories] = useState([]);
   const [authors, setauthors] = useState([]) 
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getCategoriesData().then(data => setCategories(data))
@@ -17,6 +18,7 @@ const AddBookModal = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const formData = new FormData(event.target);
 
     //Convert form to json
@@ -42,6 +44,7 @@ const AddBookModal = (props) => {
 
     try {
       const response = await addBook(jsonData);
+      setLoading(false);
       // Handle success (e.g., close modal, show success message, etc.)
       setOpen(false);
       refreshBooks();
@@ -106,7 +109,9 @@ const AddBookModal = (props) => {
             <label>{'Cover image'}</label>
             <input className='input' type="file" name='cover_image' onChange={handleFileChange}/>
           </div>  
-          <button>Create</button>
+          <button disabled={loading}>
+            {loading ? 'Loading...' : 'Create'}
+          </button>
         </form>
       </div>
     </div>

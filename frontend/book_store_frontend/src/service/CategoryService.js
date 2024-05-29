@@ -37,3 +37,17 @@ export const addCategory = async (categoryData) => {
       throw error;
     }
   };
+
+export const deleteCategory = async (categoryID) => {
+    try {
+        const response = await fetch(`http://localhost:8080/admin/category-managerment/categories/${categoryID}`, {
+            method: "DELETE"
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok' + response.statusText);
+        }
+    } catch(error) {
+        console.log(error)
+        throw error;
+    }
+}

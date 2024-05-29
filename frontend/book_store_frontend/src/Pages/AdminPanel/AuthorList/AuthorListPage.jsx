@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable.jsx'
-import { getAuthorsData } from '../../../service/AuthorService.js'
+import { getAuthorsData, deleteAuthor } from '../../../service/AuthorService.js'
 import AddAuthorModal from '../../../components/AdminPanel/AddModal/AddAuthorModal/AddAuthorModal.jsx'
 import './AuthorListPage.css'
 
@@ -31,11 +31,21 @@ const AuthorListPage = () => {
     };
   
     useEffect(() => {
-      getAuthors()
+      getAuthors();
     }, [])
 
     const refreshAuthors = () => {
       getAuthors();
+    };
+
+    const handleDelete = async (id) => {
+      try {
+        await deleteAuthor(id);
+        refreshAuthors();
+        alert('Author deleted succesfully');
+      } catch (error) {
+        console.error('Error deleting author');
+      }
     };
 
     return (
@@ -44,7 +54,7 @@ const AuthorListPage = () => {
           <h1>Authors</h1>
           <button onClick={() => setOpen(true)}>Add New Author</button>
         </div>
-        <DataTable slug="authors" columns={columns} rows={authordata}/>
+        <DataTable slug="authors" columns={columns} rows={authordata} handleDelete={handleDelete}/>
         {open && <AddAuthorModal slug="author" columns={columns} setOpen={setOpen} refreshAuthors={refreshAuthors}/> }
       </div>
     )

@@ -4,6 +4,7 @@ import com.cnjava.book_store.Author.Author;
 import com.cnjava.book_store.Category.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,12 +25,12 @@ public class Book {
 	@Column(nullable = false, length = 255)
 	private String title;	
 	
-	@JoinColumn(name = "author_id")
+	@JoinColumn(name = "author_id", nullable = true)
 	@ManyToOne()
 	private Author author;
 	
 	@ManyToOne()
-	@JoinColumn(name = "category_id")
+	@JoinColumn(name = "category_id", nullable = true)
 	private Category category;
 	private String book_cover;
 	private int stock;

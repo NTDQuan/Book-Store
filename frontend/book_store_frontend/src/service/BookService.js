@@ -37,3 +37,17 @@ export const addBook = async (bookData) => {
       throw error;
     }
   };
+
+export const deleteBook = async (bookID) => {
+    try {
+        const response = await fetch(`http://localhost:8080/admin/book-managerment/books/${bookID}`, {
+            method: "DELETE"
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok' + response.statusText);
+        }
+    } catch(error) {
+        console.log(error)
+        throw error;
+    }
+}

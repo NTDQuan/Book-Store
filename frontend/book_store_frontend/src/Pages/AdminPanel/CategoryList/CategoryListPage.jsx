@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable.jsx'
-import { getCategoriesData } from '../../../service/CategoryService.js'
+import { getCategoriesData, deleteCategory } from '../../../service/CategoryService.js'
 import AddCategoryModal from '../../../components/AdminPanel/AddModal/AddCategoryModal/AddCategoryModal.jsx'
 import './CategoryListPage.css'
 
@@ -38,13 +38,23 @@ const CategoryListPage = () => {
       getCategories();
     };
 
+    const handleDelete = async (id) => {
+      try {
+        await deleteCategory(id);
+        refreshCategories();
+        alert('Category deleted succesfully');
+      } catch (error) {
+        console.error('Error deleting category');
+      }
+    };
+
     return (
       <div className='categories'>
         <div className='info'>
           <h1>Categories</h1>
           <button onClick={() => setOpen(true)}>Add New Category</button>
         </div>
-        <DataTable slug="categories" columns={columns} rows={categorydata}/>
+        <DataTable slug="categories" columns={columns} rows={categorydata} handleDelete={handleDelete}/>
         {open && <AddCategoryModal slug="category" columns={columns} setOpen={setOpen} refreshCategories={refreshCategories}/> }
       </div>
     )

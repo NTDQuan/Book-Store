@@ -22,7 +22,7 @@ const BookListDataTable = (props) => {
                         
                         </Link>
                         <Link>
-                            <div>
+                            <div onClick={() => props.handleDelete(params.row.id)}>
                                 <img src={deleteIcon} alt=''/>   
                             </div>
                         </Link>

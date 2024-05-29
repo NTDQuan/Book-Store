@@ -37,3 +37,17 @@ export const addAuthor = async (authorData) => {
       throw error;
     }
   };
+
+export const deleteAuthor = async (authorID) => {
+    try {
+        const response = await fetch(`http://localhost:8080/admin/author-managerment/authors/${authorID}`, {
+            method: "DELETE"
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok' + response.statusText);
+        }
+    } catch(error) {
+        console.log(error)
+        throw error;
+    }
+}
