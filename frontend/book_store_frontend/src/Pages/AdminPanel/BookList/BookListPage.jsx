@@ -20,14 +20,14 @@ const columns = [
   {
     field: 'title',
     headerName: 'Title',
-    width: 460,
+    width: 440,
     type: String,
     editable: false,
   },
   {
     field: 'author',
     headerName: 'Author',
-    width: 200,
+    width: 160,
     type: String,
     editable: false,
   },
