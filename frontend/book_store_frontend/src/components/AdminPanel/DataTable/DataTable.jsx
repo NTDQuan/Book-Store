@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import deleteIcon from '../../../assets/delete_icon.svg'
 import editIcon from '../../../assets/edit_icon.svg'
 
-const BookListDataTable = (props) => {
+const DataTable = (props) => {
 
     const actionColumn = [
         {
@@ -64,4 +64,4 @@ const BookListDataTable = (props) => {
     )
 }
 
-export default BookListDataTable
+export default DataTable
