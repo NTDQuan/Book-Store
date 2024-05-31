@@ -1,9 +1,10 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable.jsx'
 import no_image from '../../../assets/no_book_cover.jpg'
 import './BookListPage.css'
-import { getBooksData, deleteBook } from '../../../service/BookService.js'
+import { getBooksData, deleteBook, getBooksDataByID } from '../../../service/BookService.js'
 import AddBookModal from '../../../components/AdminPanel/AddModal/AddBookModal/AddBookModal.jsx'
+import EditBookModal from '../../../components/AdminPanel/EditModal/EditBookModal/EditBookModal.jsx'
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -54,10 +55,11 @@ const columns = [
   }
 ];
 
-
 const BookListPage = () => {
-  const [bookdata, setBooks] = useState([])
+  const [bookData, setBooks] = useState([])
   const [open, setOpen] = useState(false)
+  const [editOpen, setEditOpen] = useState(false)
+  const [selectedBook, setSelectedBook] = useState(null)
 
   const getBooks = async() => {
     try{
@@ -81,12 +83,20 @@ const BookListPage = () => {
     try {
       await deleteBook(id);
       refreshBooks();
-      alert('Book deleted succesfully');
+      alert('Book deleted successfully');
     } catch (error) {
-      console.error('Error deleting book');
+      console.error('Error deleting book', error);
     }
   };
 
+  const handleEdit = async (id) => {
+    try {
+      setSelectedBook(await getBooksDataByID(id));
+      setEditOpen(true);
+    } catch (error) {
+      console.error('Error fetching book data', error);
+    }
+  }
 
   return (
     <div className='books'>
@@ -94,8 +104,9 @@ const BookListPage = () => {
         <h1>Books</h1>
         <button onClick={() => setOpen(true)}>Add New Book</button>
       </div>
-      <DataTable slug="books" columns={columns} rows={bookdata} handleDelete={handleDelete}/>
-      {open && <AddBookModal slug="book" columns={columns} setOpen={setOpen} refreshBooks={refreshBooks}/> }
+      <DataTable slug="books" columns={columns} rows={bookData} handleDelete={handleDelete} handleEdit={handleEdit}/>
+      {open && <AddBookModal slug="book" setOpen={setOpen} refreshBooks={refreshBooks}/>}
+      {editOpen && <EditBookModal slug="book" setOpen={setEditOpen} refreshBooks={refreshBooks} params={selectedBook}/>}
     </div>
   )
 }

@@ -6,7 +6,6 @@ import deleteIcon from '../../../assets/delete_icon.svg'
 import editIcon from '../../../assets/edit_icon.svg'
 
 const DataTable = (props) => {
-
     const actionColumn = [
         {
             field: "action",
@@ -15,18 +14,16 @@ const DataTable = (props) => {
             renderCell: (params) => {
                 return (
                     <div className='action'>
-                        <Link to={`/${props.slug}/${params.row.id}`}>
+                        <Link onClick={() => props.handleEdit(params.row.id)}>
                             <div>
-                               <img src={editIcon} alt=''/> 
-                            </div>
-                        
-                        </Link>
-                        <Link>
-                            <div onClick={() => props.handleDelete(params.row.id)}>
-                                <img src={deleteIcon} alt=''/>   
+                               <img src={editIcon} alt='Edit'/> 
                             </div>
                         </Link>
-                        
+                        <Link onClick={() => props.handleDelete(params.row.id)}>
+                            <div>
+                                <img src={deleteIcon} alt='Delete'/>   
+                            </div>
+                        </Link>
                     </div>
                 )
             }
