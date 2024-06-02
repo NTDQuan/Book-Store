@@ -61,10 +61,11 @@ public class BookController {
 	}
 	
 	@PutMapping("/books/{id}")
-	public ResponseEntity<String> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
+	public ResponseEntity<Map<String, String>> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
 		boolean updated = bookService.updateBook(id, updatedBook);
+		Map<String, String> response = Collections.singletonMap("message", "Book updated successfully");
 		if(updated) {
-			return new ResponseEntity<>("Updated", HttpStatus.OK);
+			return new ResponseEntity<>(response, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
