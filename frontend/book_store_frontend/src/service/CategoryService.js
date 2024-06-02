@@ -17,6 +17,23 @@ export function getCategoriesData() {
     })
 }
 
+export const getCategoryDataByID = async (categoryID) => {
+  return axios.get(`http://localhost:8080/admin/category-managerment/categories/${categoryID}`)
+  .then(response => {
+      if (response.status === 200) {
+          console.log("fetch data")
+          return response.data
+      } else {
+          throw new Error("Failed to fetch categories")
+      }
+          
+  })
+  .catch(error => {
+      console.log(error)
+      throw error;
+  })
+}
+
 export const addCategory = async (categoryData) => {
     try {
       const response = await fetch('http://localhost:8080/admin/category-managerment', {
@@ -51,3 +68,24 @@ export const deleteCategory = async (categoryID) => {
         throw error;
     }
 }
+
+export const updateCategory = async (categoryID, categoryData) => {
+  try {
+    const response = await fetch(`http://localhost:8080/admin/category-managerment/categories/${categoryID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(categoryData),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok' + response.statusText);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+};

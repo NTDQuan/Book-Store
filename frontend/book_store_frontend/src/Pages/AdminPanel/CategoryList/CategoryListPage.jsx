@@ -1,7 +1,8 @@
 import React, { useState, useEffect} from 'react'
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable.jsx'
-import { getCategoriesData, deleteCategory } from '../../../service/CategoryService.js'
+import { getCategoriesData, deleteCategory, getCategoryDataByID } from '../../../service/CategoryService.js'
 import AddCategoryModal from '../../../components/AdminPanel/AddModal/AddCategoryModal/AddCategoryModal.jsx'
+import EditCategoryModal from '../../../components/AdminPanel/EditModal/EditCategoryModal/EditCategoryModal.jsx'
 import './CategoryListPage.css'
 
 const columns = [
@@ -19,6 +20,8 @@ const columns = [
 const CategoryListPage = () => {
     const [categorydata, setCategories] = useState([])
     const [open, setOpen] = useState(false)
+    const [editOpen, setEditOpen] = useState(false)
+    const [selectedCategory, setSelectedCategory] = useState(null)
   
     const getCategories = async() => {
       try{
@@ -48,14 +51,24 @@ const CategoryListPage = () => {
       }
     };
 
+    const handleEdit = async (id) => {
+      try {
+        setSelectedCategory(await getCategoryDataByID(id));
+        setEditOpen(true);
+      } catch (error) {
+        console.error('Error fetching book data', error);
+      }
+    }
+
     return (
       <div className='categories'>
         <div className='info'>
           <h1>Categories</h1>
           <button onClick={() => setOpen(true)}>Add New Category</button>
         </div>
-        <DataTable slug="categories" columns={columns} rows={categorydata} handleDelete={handleDelete}/>
-        {open && <AddCategoryModal slug="category" columns={columns} setOpen={setOpen} refreshCategories={refreshCategories}/> }
+        <DataTable slug="categories" columns={columns} rows={categorydata} handleDelete={handleDelete} handleEdit={handleEdit}/>
+        {open && <AddCategoryModal slug="category" setOpen={setOpen} refreshCategories={refreshCategories}/> }
+        {editOpen && <EditCategoryModal slug="category" setOpen={setEditOpen} refreshCategories={refreshCategories} params={selectedCategory}/>}
       </div>
     )
   }

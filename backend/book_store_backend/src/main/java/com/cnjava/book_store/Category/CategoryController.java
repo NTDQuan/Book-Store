@@ -59,10 +59,11 @@ public class CategoryController {
 	}
 	
 	@PutMapping("/categories/{id}")
-	public ResponseEntity<String> updateCategory(@PathVariable Long id, @RequestBody Category updatedCategory) {
+	public ResponseEntity<Map<String, String>> updateCategory(@PathVariable Long id, @RequestBody Category updatedCategory) {
 		boolean updated = categoryService.updateCategory(id, updatedCategory);
+		Map<String, String> response = Collections.singletonMap("message", "Category updated successfully");
 		if(updated) {
-			return new ResponseEntity<>("Updated", HttpStatus.OK);
+			return new ResponseEntity<>(response, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
