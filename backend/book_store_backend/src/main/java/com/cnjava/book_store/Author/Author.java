@@ -4,12 +4,14 @@ import java.util.List;
 
 import com.cnjava.book_store.Book.Book;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PreRemove;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,4 +44,10 @@ public class Author {
 		this.fullName = fullName;
 	}
 	
+	@PreRemove
+	private void preRemove() {
+		for (Book s : books) {
+			s.setAuthor(null);
+		}
+	}
 }
