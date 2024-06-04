@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getStaffs, createStaff, updateStaff, deleteStaff, getStaffDataByID } from '../../../service/StaffService';
+import { getStaffs, createStaff, updateStaff, deleteStaff } from '../../../service/StaffService';
 import AddStaffModal from '../../../components/AdminPanel/AddModal/AddStaffModal/AddStaffModal';
 import EditStaffModal from '../../../components/AdminPanel/EditModal/EditStaffModal/EditStaffModal';
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable';
@@ -53,27 +53,24 @@ const StaffListPage = () => {
     }
   };
 
-  const handleEditClick = async (staffId) => {
-    try {
-      const staff = await getStaffDataByID(staffId);
-      setSelectedStaff(staff);
-      setEditModalVisible(true);
-    } catch (error) {
-      console.error('Error fetching staff data:', error);
-    }
-  };
-
-  const handleAddClick = () => {
-    setAddModalVisible(true);
-  };
-
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
     { field: 'fullName', headerName: 'Full Name', width: 200 },
     { field: 'birthDate', headerName: 'Birth Date', width: 150 },
     { field: 'phoneNumber', headerName: 'Phone Number', width: 150 },
     { field: 'address', headerName: 'Address', width: 200 },
+    { field: 'username', headerName: 'Username', width: 150 },
+    { field: 'password', headerName: 'Password', width: 150 }
   ];
+
+  const handleEditClick = (staff) => {
+    setSelectedStaff(staff);
+    setEditModalVisible(true);
+  };
+
+  const handleAddClick = () => {
+    setAddModalVisible(true);
+  };
 
   return (
     <div className='staff-list'>
@@ -81,7 +78,7 @@ const StaffListPage = () => {
         <h1>Staff List</h1>
         <button onClick={handleAddClick}>Add New Staff</button>
       </div>
-      <DataTable columns={columns} rows={staffs} handleDelete={handleDelete} handleEdit={handleEditClick}/>
+      <DataTable columns={columns} rows={staffs} handleDelete={handleDelete} handleEdit={handleEditClick} />
       {editModalVisible && (
         <EditStaffModal
           visible={editModalVisible}
@@ -92,9 +89,8 @@ const StaffListPage = () => {
       )}
       {addModalVisible && (
         <AddStaffModal
-          visible={addModalVisible}
+          setAddModalVisible={setAddModalVisible}
           onSave={handleAdd}
-          onCancel={() => setAddModalVisible(false)}
         />
       )}
     </div>

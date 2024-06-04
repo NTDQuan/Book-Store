@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StaffRepository extends JpaRepository<Staff, Long> {
-    // Tùy chỉnh các phương thức nếu cần
+
+    Staff findByUsername(String username);
 }

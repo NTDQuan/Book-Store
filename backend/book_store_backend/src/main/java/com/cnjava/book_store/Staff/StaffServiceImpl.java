@@ -48,4 +48,9 @@ public class StaffServiceImpl implements StaffService {
         }
         return false;
     }
+    
+    @Override
+    public Staff findByUsername(String username) {
+        return staffRepository.findByUsername(username);
+    }
 }

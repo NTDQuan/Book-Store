@@ -27,6 +27,12 @@ public class Staff {
     @Column(nullable = false, length = 255)
     private String address;
 
+    @Column(nullable = false, length = 255)
+    private String username;
+
+    @Column(nullable = false, length = 255)
+    private String password;
+
     // Getters and Setters
     public Long getId() {
         return id;
@@ -66,5 +72,21 @@ public class Staff {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

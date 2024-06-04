@@ -6,14 +6,14 @@ const AddStaffModal = ({ setAddModalVisible, onSave }) => {
     fullName: '',
     birthDate: '',
     phoneNumber: '',
-    address: ''
+    address: '',
+    username: '',
+    password: ''
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Gửi dữ liệu đến backend
     onSave(formData);
-    console.log(formData)
     setAddModalVisible(false);
   };
 
@@ -30,19 +30,27 @@ const AddStaffModal = ({ setAddModalVisible, onSave }) => {
         <form onSubmit={handleSubmit}>
           <div className="item">
             <label>Full Name</label>
-            <input className='input' type="text" name="fullName" value={formData.fullname} onChange={handleChange} />
+            <input className='input' type="text" name="fullName" value={formData.fullName} onChange={handleChange} />
           </div>
           <div className="item">
             <label>Birth Date</label>
-            <input className='input' type="date" name="birthDate" value={formData.birthdate} onChange={handleChange} />
+            <input className='input' type="date" name="birthDate" value={formData.birthDate} onChange={handleChange} />
           </div>
           <div className="item">
             <label>Phone Number</label>
-            <input className='input' type="text" name="phoneNumber" value={formData.phonenumber} onChange={handleChange} />
+            <input className='input' type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
           </div>
           <div className="item">
             <label>Address</label>
             <input className='input' type="text" name="address" value={formData.address} onChange={handleChange} />
+          </div>
+          <div className="item">
+            <label>Username</label>
+            <input className='input' type="text" name="username" value={formData.username} onChange={handleChange} />
+          </div>
+          <div className="item">
+            <label>Password</label>
+            <input className='input' type="password" name="password" value={formData.password} onChange={handleChange} />
           </div>
           <button type="submit">Add Staff</button>
         </form>

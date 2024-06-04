@@ -12,4 +12,6 @@ public interface StaffService {
     boolean updateStaff(Long id, Staff staff);
 
     boolean deleteStaffById(Long id);
+    
+    Staff findByUsername(String username);
 }
