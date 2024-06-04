@@ -32,11 +32,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public boolean updateCustomer(Long id, Customer updatedCustomer) {
-        if (customerRepository.existsById(id)) {
-            customerRepository.save(updatedCustomer);
-            return true;
+        if (!customerRepository.existsById(id)) {
+        	return false;
         }
-        return false;
+        Customer existingCustomer = customerRepository.findById(id).get();
+        
+        existingCustomer.setAddress(updatedCustomer.getAddress());
+        existingCustomer.setBirthDate(updatedCustomer.getBirthDate());
+        existingCustomer.setFullName(updatedCustomer.getFullName());
+        existingCustomer.setPhoneNumber(updatedCustomer.getPhoneNumber());
+        existingCustomer.setPassword(updatedCustomer.getPassword());
+        customerRepository.save(existingCustomer);
+        return true;
     }
 
     @Override
