@@ -23,10 +23,13 @@ public class Customer {
 
     @Column(nullable = false, length = 255)
     private String address;
+    
+    @Column(nullable = false, length = 255)
+    private String phoneNumber;
 
     @Column(nullable = false, length = 255, unique = true)
     private String username;
-
+    
     @Column(nullable = false, length = 255)
     private String password;
 
@@ -78,4 +81,14 @@ public class Customer {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+    
+    
 }

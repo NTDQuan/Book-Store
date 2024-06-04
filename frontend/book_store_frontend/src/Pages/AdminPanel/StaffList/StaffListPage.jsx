@@ -93,8 +93,8 @@ const StaffListPage = () => {
       {addModalVisible && (
         <AddStaffModal
           visible={addModalVisible}
+          setAddModalVisible={setAddModalVisible}
           onSave={handleAdd}
-          onCancel={() => setAddModalVisible(false)}
         />
       )}
     </div>
