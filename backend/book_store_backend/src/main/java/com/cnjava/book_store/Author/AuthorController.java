@@ -1,10 +1,13 @@
 package com.cnjava.book_store.Author;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/admin/author-managermant")
+@CrossOrigin("*")
+@RequestMapping("/admin/author-managerment")
 public class AuthorController {
 	AuthorService authorService;
 	
@@ -39,9 +43,10 @@ public class AuthorController {
 	}	
 	
 	@PostMapping()
-	public ResponseEntity<String> addNewAuthor(@RequestBody Author newAuthor) {
+	public ResponseEntity<Map<String, String>> addNewAuthor(@RequestBody Author newAuthor) {
 		authorService.createAuthor(newAuthor);
-		return new ResponseEntity<>("Author added successfully", HttpStatus.OK);
+		Map<String, String> response = Collections.singletonMap("message", "Author added successfully");
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/authors/{id}")
@@ -54,10 +59,11 @@ public class AuthorController {
 	}
 	
 	@PutMapping("/authors/{id}")
-	public ResponseEntity<String> updateAuthor(@PathVariable Long id, @RequestBody Author updatedAuthor) {
+	public ResponseEntity<Map<String, String>> updateAuthor(@PathVariable Long id, @RequestBody Author updatedAuthor) {
 		boolean updated = authorService.updateAuthor(id, updatedAuthor);
+		Map<String, String> response = Collections.singletonMap("message", "Category updated successfully");
 		if(updated) {
-			return new ResponseEntity<>("Updated", HttpStatus.OK);
+			return new ResponseEntity<>(response, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
