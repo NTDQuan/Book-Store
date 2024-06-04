@@ -5,6 +5,7 @@ import AdminAuthorContainer from "./Pages/AdminPanel/AuthorList/AuthorListPage"
 import AdminCategoryContainer from "./Pages/AdminPanel/CategoryList/CategoryListPage"
 import AdminHomeContainer from "./Pages/AdminPanel/Home/Home"
 import StaffListPage  from "./Pages/AdminPanel/StaffList/StaffListPage";
+import CustomerListPage  from "./Pages/AdminPanel/CustomerList/CustomerListPage";
 import "./Styles/global.css"
 
 const router = createBrowserRouter([
@@ -37,7 +38,11 @@ const router = createBrowserRouter([
       {
         path: "staff", // Route for Staff
         element: <StaffListPage/>
-      }
+      },
+      {
+        path: "customer", // Route for customer
+        element: <CustomerListPage/>
+      },
     ],
   }
 ]);

@@ -59,10 +59,11 @@ public class AuthorController {
 	}
 	
 	@PutMapping("/authors/{id}")
-	public ResponseEntity<String> updateAuthor(@PathVariable Long id, @RequestBody Author updatedAuthor) {
+	public ResponseEntity<Map<String, String>> updateAuthor(@PathVariable Long id, @RequestBody Author updatedAuthor) {
 		boolean updated = authorService.updateAuthor(id, updatedAuthor);
+		Map<String, String> response = Collections.singletonMap("message", "Category updated successfully");
 		if(updated) {
-			return new ResponseEntity<>("Updated", HttpStatus.OK);
+			return new ResponseEntity<>(response, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
