@@ -14,10 +14,12 @@ import com.cnjava.book_store.Customer.Customer;
 import com.cnjava.book_store.Enum.RoleEnum;
 import com.cnjava.book_store.Role.Role;
 import com.cnjava.book_store.Role.RoleRepository;
+import com.cnjava.book_store.Staff.Staff;
 import com.cnjava.book_store.User.User;
 import com.cnjava.book_store.User.UserRepository;
 import com.cnjava.book_store.User.dto.LoginUserDto;
 import com.cnjava.book_store.User.dto.RegisterCustomerDto;
+import com.cnjava.book_store.User.dto.RegisterStaffDto;
 
 @Service
 public class AuthenticationService {
@@ -59,6 +61,24 @@ public class AuthenticationService {
         customer.setPhoneNumber(input.getPhoneNumber());
         customer.setRoles(Set.of(optionalRole.get()));
         return userRepository.save(customer);
+    }
+    
+    public User registerStaff(RegisterStaffDto input) {
+    	Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.STAFF);
+        if (optionalRole.isEmpty()) {
+            return null;
+        }
+    	
+    	logger.info("RegisterCustomerDto: {}", input);
+        Staff staff = new Staff();
+        staff.setUsername(input.getUsername());
+        staff.setPassword(passwordEncoder.encode(input.getPassword()));
+        staff.setBirthDate(input.getBirthDate());
+        staff.setAddress(input.getAddress());
+        staff.setFullName(input.getFullName());
+        staff.setPhoneNumber(input.getPhoneNumber());
+        staff.setRoles(Set.of(optionalRole.get()));
+        return userRepository.save(staff);
     }
     
     public User authenticate(LoginUserDto input) {

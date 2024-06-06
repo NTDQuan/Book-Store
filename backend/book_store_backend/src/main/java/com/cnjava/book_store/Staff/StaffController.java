@@ -3,23 +3,28 @@ package com.cnjava.book_store.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import com.cnjava.book_store.User.UserService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/admin/staff-management")
+@RequestMapping("/admin")
 public class StaffController {
 
     private final StaffService staffService;
+    private final UserService userService;
 
     @Autowired
-    public StaffController(StaffService staffService) {
+    public StaffController(StaffService staffService, UserService userService) {
         this.staffService = staffService;
+        this.userService = userService;
     }
-
+    
     @GetMapping("/staffs")
     public ResponseEntity<List<StaffDTO>> findAllStaffs() {
         List<Staff> staffs = staffService.findAll();
@@ -39,6 +44,7 @@ public class StaffController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> addNewStaff(@RequestBody StaffDTO newStaffDTO) {
         Staff newStaff = StaffMapper.toEntity(newStaffDTO);
         staffService.createStaff(newStaff);

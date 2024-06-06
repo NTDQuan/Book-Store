@@ -10,6 +10,7 @@ import com.cnjava.book_store.Jwt.JwtService;
 import com.cnjava.book_store.User.User;
 import com.cnjava.book_store.User.dto.LoginUserDto;
 import com.cnjava.book_store.User.dto.RegisterCustomerDto;
+import com.cnjava.book_store.User.dto.RegisterStaffDto;
 
 @RequestMapping("/auth")
 @RestController
@@ -26,6 +27,12 @@ public class AuthenticationController {
     public ResponseEntity<User> register(@RequestBody RegisterCustomerDto registerCustomerDto) {
         User registeredUser = authenticationService.registerCustomer(registerCustomerDto);
         return ResponseEntity.ok(registeredUser);
+    }
+    
+    @PostMapping("/admin/signup")
+    public ResponseEntity<User> adminRegister(@RequestBody RegisterStaffDto registerStaffDto) {
+    	User registeredUser = authenticationService.registerStaff(registerStaffDto);
+    	return ResponseEntity.ok(registeredUser);
     }
     
     @PostMapping("/login")
