@@ -3,12 +3,11 @@ import './EditStaffModal.css';
 
 const EditStaffModal = ({ staff, onSave, onCancel }) => {
   const [formData, setFormData] = useState({
-    fullName: staff.fullName,
-    birthDate: staff.birthDate,
-    phoneNumber: staff.phoneNumber,
-    address: staff.address,
-    username: staff.username,
-    password: staff.password
+
+    fullName: '',
+    birthDate: '',
+    phoneNumber: '',
+    address: ''
   });
 
   useEffect(() => {
@@ -25,6 +24,7 @@ const EditStaffModal = ({ staff, onSave, onCancel }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     onSave(formData);
+    alert('Staff edited successfully')
   };
 
   const handleChange = (event) => {

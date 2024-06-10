@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getCustomers, createCustomer, updateCustomer, deleteCustomer } from '../../../service/fetchCustomerData';
+import { getCustomers, createCustomer, deleteCustomer, getCustomerDataByID } from '../../../service/CustomerService';
 import AddCustomerModal from '../../../components/AdminPanel/AddModal/AddCustomerModal/AddCustomerModal';
 import EditCustomerModal from '../../../components/AdminPanel/EditModal/EditCustomerModal/EditCustomerModal';
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable';
@@ -24,16 +24,6 @@ const CustomerListPage = () => {
     }
   };
 
-  const handleEdit = async (updatedCustomerData) => {
-    try {
-      await updateCustomer(selectedCustomer.id, updatedCustomerData);
-      setEditModalVisible(false);
-      fetchCustomers();
-    } catch (error) {
-      console.error('Error updating customer:', error);
-    }
-  };
-
   const handleAdd = async (newCustomerData) => {
     try {
       await createCustomer(newCustomerData);
@@ -53,6 +43,20 @@ const CustomerListPage = () => {
     }
   };
 
+  const handleEditClick = async (customerId) => {
+    try {
+      const customer = await getCustomerDataByID(customerId);
+      setSelectedCustomer(customer);
+      setEditModalVisible(true);
+    } catch (error) {
+      console.error('Error fetching customer data:', error);
+    }
+  };
+
+  const handleAddClick = () => {
+    setAddModalVisible(true);
+  };
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
     { field: 'fullName', headerName: 'Full Name', width: 200 },
@@ -60,17 +64,7 @@ const CustomerListPage = () => {
     { field: 'phoneNumber', headerName: 'Phone Number', width: 150 },
     { field: 'address', headerName: 'Address', width: 200 },
     { field: 'username', headerName: 'Username', width: 150 },
-    // Exclude password field from displaying
   ];
-
-  const handleEditClick = (customer) => {
-    setSelectedCustomer(customer);
-    setEditModalVisible(true);
-  };
-
-  const handleAddClick = () => {
-    setAddModalVisible(true);
-  };
 
   return (
     <div className='customer-list'>
@@ -78,17 +72,18 @@ const CustomerListPage = () => {
         <h1>Customer List</h1>
         <button onClick={handleAddClick}>Add New Customer</button>
       </div>
-      <DataTable columns={columns} rows={customers} handleDelete={handleDelete}/>
+      <DataTable columns={columns} rows={customers} handleDelete={handleDelete} handleEdit={handleEditClick} />
       {editModalVisible && (
         <EditCustomerModal
           visible={editModalVisible}
           customer={selectedCustomer}
-          onSave={handleEdit}
           onCancel={() => setEditModalVisible(false)}
+          refresh={fetchCustomers}
         />
       )}
       {addModalVisible && (
         <AddCustomerModal
+          visible={addModalVisible}
           setAddModalVisible={setAddModalVisible}
           onSave={handleAdd}
         />

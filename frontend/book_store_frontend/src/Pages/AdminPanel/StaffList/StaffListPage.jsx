@@ -89,7 +89,7 @@ const StaffListPage = () => {
       )}
       {addModalVisible && (
         <AddStaffModal
-          setAddModalVisible={setAddModalVisible}
+          visible={addModalVisible}
           onSave={handleAdd}
         />
       )}

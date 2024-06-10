@@ -9,6 +9,7 @@ public class CustomerDTO {
     private String address;
     private String username;
     private String password;
+    private String phoneNumber;
 
     // Getters and Setters
     public Long getId() {
@@ -58,4 +59,14 @@ public class CustomerDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+    
+    
 }
