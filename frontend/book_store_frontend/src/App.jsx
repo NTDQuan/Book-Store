@@ -7,6 +7,7 @@ import AdminHomeContainer from "./Pages/AdminPanel/Home/Home";
 import StaffListPage from "./Pages/AdminPanel/StaffList/StaffListPage";
 import CustomerListPage from "./Pages/AdminPanel/CustomerList/CustomerListPage";
 import LoginPage from "./Pages/AdminPanel/Login/LoginPage";
+import CustomerLoginPage from './Pages/UserWeb/CustomerLogin/CustomerLoginPage'
 import PrivateAdminRoute from "./route/PrivateRoute";
 import AuthProvider from "./hooks/AuthProvider";
 
@@ -27,6 +28,7 @@ function App() {
                   <Route path="customers" element={<CustomerListPage />} />
                 </Route>
               </Route>
+              <Route path="/login" element={<CustomerLoginPage />}/>
             </Routes>
         </AuthProvider>
       </Router>
