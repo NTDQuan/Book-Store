@@ -8,6 +8,8 @@ import StaffListPage from "./Pages/AdminPanel/StaffList/StaffListPage";
 import CustomerListPage from "./Pages/AdminPanel/CustomerList/CustomerListPage";
 import AdminLogin from "./Pages/AdminPanel/Auth/AdminLogin"; // Import AdminLogin
 import PrivateRoute from "./components/Common/PrivateRoute"; // Import PrivateRoute
+import OrderListPage from './Pages/AdminPanel/OrderList/OrderListPage';
+
 import "./Styles/global.css";
 
 const router = createBrowserRouter([
@@ -52,6 +54,10 @@ const router = createBrowserRouter([
           {
             path: "customer", // Route for Customer
             element: <CustomerListPage />,
+          },
+          {
+            path: "order", // Route for Order
+            element: <OrderListPage />,
           },
         ],
       },
