@@ -36,9 +36,8 @@ const CustomerLoginPage = () => {
             <label><input type="checkbox"/>Remember me</label>
             <a herf="#">Forgot Password</a>
           </div>          
+          <button type="submit">Login</button>
         </div>
-
-        <button type="submit">Login</button>
         <div className='register-link'>
           <p>Don't have an account ? <a href="/register">Register</a></p>
         </div>

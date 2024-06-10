@@ -119,6 +119,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  margin-top: 24px;
   background: #FA7C54;
   border: 1px solid #FA7C54;
   color: #FFF;
@@ -126,6 +127,7 @@
   line-height: 100%;
   font-style: normal;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .CustomerLoginPage .wrapper .register-link {

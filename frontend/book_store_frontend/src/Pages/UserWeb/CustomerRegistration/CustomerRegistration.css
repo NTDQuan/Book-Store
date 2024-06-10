@@ -127,6 +127,7 @@
     line-height: 100%;
     font-style: normal;
     font-size: 16px;
+    cursor: pointer;
   }
   
   .customer-registration-page .wrapper .login-link {
