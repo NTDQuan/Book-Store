@@ -10,6 +10,7 @@ import LoginPage from "./Pages/AdminPanel/Login/LoginPage";
 import CustomerLoginPage from './Pages/UserWeb/CustomerLogin/CustomerLoginPage'
 import PrivateAdminRoute from "./route/PrivateRoute";
 import AuthProvider from "./hooks/AuthProvider";
+import Register from "./Pages/UserWeb/CustomerRegistration/CustomerRegistration";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 </Route>
               </Route>
               <Route path="/login" element={<CustomerLoginPage />}/>
+              <Route path="/register" element={<Register />} />
             </Routes>
         </AuthProvider>
       </Router>

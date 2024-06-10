@@ -11,11 +11,6 @@ const CustomerLoginPage = () => {
     navigate("/");
   }, [navigate]);
 
-  const onNewUserRegisterClick = useCallback(() => {
-    navigate("/register");
-  }, [navigate]);
-
-
   return (
     <div className='CustomerLoginPage'>
       <div className='wrapper'>
@@ -45,7 +40,7 @@ const CustomerLoginPage = () => {
 
         <button type="submit">Login</button>
         <div className='register-link'>
-          <p>Don't have an account ? <a href='#'>Register</a></p>
+          <p>Don't have an account ? <a href="/register">Register</a></p>
         </div>
       </div>
     </div>
