@@ -1,6 +1,7 @@
 package com.cnjava.book_store.Authentication;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +12,10 @@ import com.cnjava.book_store.User.User;
 import com.cnjava.book_store.User.dto.LoginUserDto;
 import com.cnjava.book_store.User.dto.RegisterCustomerDto;
 import com.cnjava.book_store.User.dto.RegisterStaffDto;
+import com.cnjava.book_store.Authentication.LoginResponse;
 
 @RequestMapping("/auth")
+@CrossOrigin("*")
 @RestController
 public class AuthenticationController {
 	private final JwtService jwtService;
@@ -41,7 +44,7 @@ public class AuthenticationController {
 
         String jwtToken = jwtService.generateToken(authenticatedUser);
 
-        LoginResponse loginResponse = new LoginResponse().setToken(jwtToken).setExpiresIn(jwtService.getExpirationTime());
+        LoginResponse loginResponse = new LoginResponse().setToken(jwtToken).setExpiresIn(jwtService.getExpirationTime()).setId(authenticatedUser.getId()).setRole(authenticatedUser.getRoles());
 
         return ResponseEntity.ok(loginResponse);
     }

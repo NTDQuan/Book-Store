@@ -1,56 +1,36 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import AdminLayout from "./Pages/AdminPanel/Layout/Layout"
-import AdminBookContainer from "./Pages/AdminPanel/BookList/BookListPage"
-import AdminAuthorContainer from "./Pages/AdminPanel/AuthorList/AuthorListPage"
-import AdminCategoryContainer from "./Pages/AdminPanel/CategoryList/CategoryListPage"
-import AdminHomeContainer from "./Pages/AdminPanel/Home/Home"
-import StaffListPage  from "./Pages/AdminPanel/StaffList/StaffListPage";
-import CustomerListPage  from "./Pages/AdminPanel/CustomerList/CustomerListPage";
-import "./Styles/global.css"
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <div>user interface</div>
-    ),
-  },
-  {
-    path: "/admin",
-    element: <AdminLayout/>,
-    children: [
-      {
-        path: "books",
-        element: <AdminBookContainer/>
-      },
-      {
-        path: "",
-        element: <AdminHomeContainer/>
-      },
-      {
-        path: "authors",
-        element: <AdminAuthorContainer/>
-      },
-      {
-        path: "categories",
-        element: <AdminCategoryContainer/>
-      },
-      {
-        path: "staff", // Route for Staff
-        element: <StaffListPage/>
-      },
-      {
-        path: "customer", // Route for customer
-        element: <CustomerListPage/>
-      },
-    ],
-  }
-]);
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AdminLayout from "./Pages/AdminPanel/Layout/Layout";
+import AdminBookContainer from "./Pages/AdminPanel/BookList/BookListPage";
+import AdminAuthorContainer from "./Pages/AdminPanel/AuthorList/AuthorListPage";
+import AdminCategoryContainer from "./Pages/AdminPanel/CategoryList/CategoryListPage";
+import AdminHomeContainer from "./Pages/AdminPanel/Home/Home";
+import StaffListPage from "./Pages/AdminPanel/StaffList/StaffListPage";
+import CustomerListPage from "./Pages/AdminPanel/CustomerList/CustomerListPage";
+import LoginPage from "./Pages/AdminPanel/Login/LoginPage";
+import PrivateAdminRoute from "./route/PrivateRoute";
+import AuthProvider from "./hooks/AuthProvider";
 
 function App() {
   return (
-    <RouterProvider router={router}/>
+    <div className="App">
+      <Router>
+        <AuthProvider>
+            <Routes>
+              <Route path="/admin/login" element={<LoginPage />} />
+              <Route element={<PrivateAdminRoute />}>
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route path="books" element={<AdminBookContainer />} />
+                  <Route path="authors" element={<AdminAuthorContainer />} />
+                  <Route path="categories" element={<AdminCategoryContainer />} />
+                  <Route path="home" element={<AdminHomeContainer />} />
+                  <Route path="staffs" element={<StaffListPage />} />
+                  <Route path="customers" element={<CustomerListPage />} />
+                </Route>
+              </Route>
+            </Routes>
+        </AuthProvider>
+      </Router>
+    </div>
   );
 }
 

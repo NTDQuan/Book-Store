@@ -41,14 +41,14 @@ export const menu = [
       },
       {
         id: 4,
-        title: "Staff",
-        url: "/admin/staff",
+        title: "Staffs",
+        url: "/admin/staffs",
         icon: staffIcon,
       },
       {
         id: 5,
-        title: "Customer",
-        url: "/admin/customer",
+        title: "Customers",
+        url: "/admin/customers",
         icon: customerIcon,
       },
     ],

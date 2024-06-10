@@ -2,9 +2,11 @@ import React from 'react'
 import logo from '../../../assets/logo.svg'
 import notificationIcon from '../../../assets/notification.svg'
 import Avatar from '../../General/Avatar/Avatar'
+import { useAuth } from '../../../hooks/AuthProvider';
 import './NavBar.css'
 
 const NavBar = () => {
+  const { user } = useAuth();
   return (
     <div className='navbar'>
       <div className='logo'>
@@ -18,7 +20,6 @@ const NavBar = () => {
         </div>
         <div className="user">
           <Avatar className="user"/>
-          <span>User name</span>
         </div>
       </div>
     </div>
