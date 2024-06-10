@@ -4,6 +4,7 @@ import com.cnjava.book_store.Author.Author;
 import com.cnjava.book_store.Category.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,19 +25,17 @@ public class Book {
 	@Column(nullable = false, length = 255)
 	private String title;	
 	
-	@JoinColumn(name = "author_id")
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "author_id", nullable = true)
+	@ManyToOne()
 	private Author author;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
-	@JoinColumn(name = "category_id")
+	@ManyToOne()
+	@JoinColumn(name = "category_id", nullable = true)
 	private Category category;
 	private String book_cover;
 	private int stock;
 	private String description;
-	
+	private Double price;
 	public Book() {
 		
 	}
@@ -94,6 +93,16 @@ public class Book {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	
 	
 	
 }

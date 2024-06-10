@@ -1,16 +1,17 @@
-package com.cnjava.book_store.Book;
+package com.cnjava.book_store.Book.dto;
 
-import com.cnjava.book_store.Author.AuthorDTO;
-import com.cnjava.book_store.Category.CategoryDTO;
+import com.cnjava.book_store.Author.Author;
+import com.cnjava.book_store.Category.Category;
 
 public class BookDTO {
 	private long id;
 	private String title;
-	private AuthorDTO author;
-	private CategoryDTO category;
+	private String author;
+	private String category;
 	private String book_cover;
 	private int stock;
 	private String description;
+	private Double price;
 	public long getId() {
 		return id;
 	}
@@ -23,16 +24,16 @@ public class BookDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public AuthorDTO getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
-	public void setAuthor(AuthorDTO author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public CategoryDTO getCategory() {
+	public String getCategory() {
 		return category;
 	}
-	public void setCategory(CategoryDTO category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 	public String getBook_cover() {
@@ -53,6 +54,13 @@ public class BookDTO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
 	
 	
 }
