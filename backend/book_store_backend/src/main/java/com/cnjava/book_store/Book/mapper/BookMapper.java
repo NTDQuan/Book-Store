@@ -26,4 +26,9 @@ public class BookMapper {
 		bookDTO.setPrice(book.getPrice());
 		return bookDTO;
 	}
+
+	public static Book toEntity(BookDTO book) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
+	}
 }

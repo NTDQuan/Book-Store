@@ -4,6 +4,7 @@ import authorIcon from "../../../assets/author_list_icon.svg"
 import categoryIcon from "../../../assets/category_list_icon.svg"
 import staffIcon from "../../../assets/staff_icon.svg";
 import customerIcon from "../../../assets/customer_icon.svg";
+import orderIcon from "../../../assets/order_icon.svg";
 export const menu = [
   {
     id: 1,
@@ -50,6 +51,12 @@ export const menu = [
         title: "Customer",
         url: "/admin/customer",
         icon: customerIcon,
+      },
+      {
+        id: 6,
+        title: "Order",
+        url: "/admin/order",
+        icon: orderIcon,
       },
     ],
   },
