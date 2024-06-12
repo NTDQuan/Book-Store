@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import logo from './../../../assets/logo-21@2x.png'
+import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../../service/AuthService'
 import './CustomerRegistration.css'
 
 const CustomerRegistration = () => {
     const [input, setInput] = useState({})
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -17,6 +19,8 @@ const CustomerRegistration = () => {
         try {
             await registerUser(input);
             console.log('Customer created successfully');
+            alert("Registered successfully")
+            navigate('/login');
         } catch (error) {
             console.error("Error creating customer")
         }
