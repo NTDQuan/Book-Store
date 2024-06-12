@@ -5,9 +5,9 @@ import './AddOrderModal.css';
 
 const AddOrderModal = ({ visible, setAddModalVisible, onSave }) => {
   const [orderData, setOrderData] = useState({
-    customerId: '',
-    status: '',
-    bookItems: [{ bookId: '', quantity: 1, price: 0 }]
+    customer: '',
+    status: 'PENDING', // Default status
+    orderItems: [{ book: '', quantity: 1 }]
   });
   const [books, setBooks] = useState([]);
   const [customers, setCustomers] = useState([]);
@@ -35,38 +35,27 @@ const AddOrderModal = ({ visible, setAddModalVisible, onSave }) => {
     }
   };
 
-  const handleBookItemChange = (index, field, value) => {
-    const newBookItems = [...orderData.bookItems];
-    newBookItems[index][field] = value;
-    if (field === 'bookId') {
-      const selectedBook = books.find(book => book.id === parseInt(value));
-      newBookItems[index].price = selectedBook ? selectedBook.price : 0;
-    }
-    setOrderData({ ...orderData, bookItems: newBookItems });
+  const handleOrderItemChange = (index, field, value) => {
+    const newOrderItems = [...orderData.orderItems];
+    newOrderItems[index][field] = value;
+    setOrderData({ ...orderData, orderItems: newOrderItems });
   };
 
-  const handleAddBookItem = () => {
+  const handleAddOrderItem = () => {
     setOrderData({
       ...orderData,
-      bookItems: [...orderData.bookItems, { bookId: '', quantity: 1, price: 0 }]
+      orderItems: [...orderData.orderItems, { book: '', quantity: 1 }]
     });
   };
 
-  const handleRemoveBookItem = (index) => {
-    const newBookItems = orderData.bookItems.filter((_, i) => i !== index);
-    setOrderData({ ...orderData, bookItems: newBookItems });
-  };
-
-  const calculateTotalPrice = () => {
-    return orderData.bookItems.reduce((total, item) => {
-      return total + item.price * item.quantity;
-    }, 0);
+  const handleRemoveOrderItem = (index) => {
+    const newOrderItems = orderData.orderItems.filter((_, i) => i !== index);
+    setOrderData({ ...orderData, orderItems: newOrderItems });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const totalPrice = calculateTotalPrice();
-    onSave({ ...orderData, totalPrice });
+    onSave(orderData);
   };
 
   if (!visible) return null;
@@ -79,8 +68,8 @@ const AddOrderModal = ({ visible, setAddModalVisible, onSave }) => {
           <div className="form-group">
             <label>Customer</label>
             <select
-              value={orderData.customerId}
-              onChange={(e) => setOrderData({ ...orderData, customerId: e.target.value })}
+              value={orderData.customer}
+              onChange={(e) => setOrderData({ ...orderData, customer: e.target.value })}
               required
             >
               <option value="">Select Customer</option>
@@ -96,7 +85,6 @@ const AddOrderModal = ({ visible, setAddModalVisible, onSave }) => {
               onChange={(e) => setOrderData({ ...orderData, status: e.target.value })}
               required
             >
-              <option value="">Select Status</option>
               <option value="PENDING">Pending</option>
               <option value="CONFIRMED">Confirmed</option>
               <option value="SHIPPED">Shipped</option>
@@ -104,12 +92,12 @@ const AddOrderModal = ({ visible, setAddModalVisible, onSave }) => {
               <option value="CANCELLED">Cancelled</option>
             </select>
           </div>
-          {orderData.bookItems.map((item, index) => (
+          {orderData.orderItems.map((item, index) => (
             <div key={index} className="form-group book-item">
               <label>Book</label>
               <select
-                value={item.bookId}
-                onChange={(e) => handleBookItemChange(index, 'bookId', e.target.value)}
+                value={item.book}
+                onChange={(e) => handleOrderItemChange(index, 'book', e.target.value)}
                 required
               >
                 <option value="">Select Book</option>
@@ -121,23 +109,14 @@ const AddOrderModal = ({ visible, setAddModalVisible, onSave }) => {
               <input
                 type="number"
                 value={item.quantity}
-                onChange={(e) => handleBookItemChange(index, 'quantity', e.target.value)}
+                onChange={(e) => handleOrderItemChange(index, 'quantity', e.target.value)}
                 min="1"
                 required
               />
-              {/* <label>Price</label>
-              <input
-                type="number"
-                value={item.price}
-                readOnly
-              /> */}
-              <button type="button" onClick={() => handleRemoveBookItem(index)}>Remove</button>
+              <button type="button" onClick={() => handleRemoveOrderItem(index)}>Remove</button>
             </div>
           ))}
-          <button type="button" onClick={handleAddBookItem}>Add Book</button>
-          <div className="form-group">
-            <label>Total Price: {calculateTotalPrice()}</label>
-          </div>
+          <button type="button" onClick={handleAddOrderItem}>Add Book</button>
           <button type="submit">Save</button>
         </form>
         <button onClick={() => setAddModalVisible(false)}>Cancel</button>

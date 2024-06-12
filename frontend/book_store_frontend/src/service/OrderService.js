@@ -1,26 +1,3 @@
-// import axios from "axios";
-
-// const BASE_URL = "http://localhost:8080/admin/order-management";
-
-// export const getOrders = async () => {
-//   const response = await axios.get(BASE_URL);
-//   return response.data;
-// };
-
-// export const createOrder = async (orderData) => {
-//   const response = await axios.post(BASE_URL, orderData);
-//   return response.data;
-// };
-
-// export const updateOrder = async (orderId, orderData) => {
-//   const response = await axios.put(`${BASE_URL}/${orderId}`, orderData);
-//   return response.data;
-// };
-
-// export const deleteOrder = async (orderId) => {
-//   const response = await axios.delete(`${BASE_URL}/${orderId}`);
-//   return response.data;
-// };
 import axios from "axios";
 
 const baseURL = "http://localhost:8080/admin/order-management";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getOrders, createOrder, deleteOrder, getOrderDataByID } from '../../../service/OrderService';
+import { getOrders, createOrder, deleteOrder, getOrderDataByID, updateOrder } from '../../../service/OrderService';
 import AddOrderModal from '../../../components/AdminPanel/AddModal/AddOrderModal/AddOrderModal';
 import EditOrderModal from '../../../components/AdminPanel/EditModal/EditOrderModal/EditOrderModal';
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable';
@@ -34,6 +34,16 @@ const OrderListPage = () => {
     }
   };
 
+  const handleEdit = async (orderId, updatedOrderData) => {
+    try {
+      await updateOrder(orderId, updatedOrderData);
+      setEditModalVisible(false);
+      fetchOrders();
+    } catch (error) {
+      console.error('Error updating order:', error);
+    }
+  };
+
   const handleDelete = async (orderId) => {
     try {
       await deleteOrder(orderId);
@@ -59,7 +69,7 @@ const OrderListPage = () => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'customerId', headerName: 'Customer ID', width: 200 },
+    { field: 'customer', headerName: 'Customer ID', width: 200 },
     { field: 'status', headerName: 'Status', width: 150 },
     { field: 'totalPrice', headerName: 'Total Price', width: 150 },
     { field: 'startDate', headerName: 'Start Date', width: 200 },
@@ -76,8 +86,8 @@ const OrderListPage = () => {
         <EditOrderModal
           visible={editModalVisible}
           order={selectedOrder}
-          onCancel={() => setEditModalVisible(false)}
-          refresh={fetchOrders}
+          setEditModalVisible={setEditModalVisible}
+          onSave={handleEdit}
         />
       )}
       {addModalVisible && (
@@ -92,3 +102,4 @@ const OrderListPage = () => {
 };
 
 export default OrderListPage;
+ 
