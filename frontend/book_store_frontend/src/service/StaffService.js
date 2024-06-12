@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:8080/admin/staff-management";
+const baseURL = "http://localhost:8080/admin";
 
 const getStaffs = async () => {
   try {
@@ -13,7 +13,7 @@ const getStaffs = async () => {
 };
 
 const getStaffDataByID = async (staffID) => {
-  return axios.get(`http://localhost:8080/admin/staff-management/staffs/${staffID}`)
+  return axios.get(`${baseURL}/staffs/${staffID}`)
   .then(response => {
       if (response.status === 200) {
           console.log("fetch data")

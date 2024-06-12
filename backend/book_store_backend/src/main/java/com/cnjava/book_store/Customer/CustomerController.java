@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/admin/customer-management")
+@RequestMapping("/admin")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -38,7 +38,7 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping()
+    @PostMapping("/customer")
     public ResponseEntity<String> addNewCustomer(@RequestBody CustomerDTO newCustomerDTO) {
         Customer newCustomer = CustomerMapper.toEntity(newCustomerDTO);
         customerService.createCustomer(newCustomer);

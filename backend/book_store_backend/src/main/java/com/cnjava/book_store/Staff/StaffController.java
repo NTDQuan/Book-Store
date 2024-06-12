@@ -43,7 +43,7 @@ public class StaffController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping()
+    @PostMapping("/staffs")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> addNewStaff(@RequestBody StaffDTO newStaffDTO) {
         Staff newStaff = StaffMapper.toEntity(newStaffDTO);

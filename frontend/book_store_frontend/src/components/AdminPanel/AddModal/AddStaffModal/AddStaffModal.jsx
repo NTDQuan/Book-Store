@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import registerStaff from '../../../../service/AuthService';
 import './AddStaffModal.css';
 
 const AddStaffModal = ({ visible, setAddModalVisible, onSave }) => {
@@ -6,7 +7,9 @@ const AddStaffModal = ({ visible, setAddModalVisible, onSave }) => {
     fullName: '',
     birthDate: '',
     phoneNumber: '',
-    address: ''
+    address: '',
+    username: '',
+    password: ''
   });
 
   const handleSubmit = (event) => {
@@ -44,6 +47,14 @@ const AddStaffModal = ({ visible, setAddModalVisible, onSave }) => {
             <div className="item">
               <label>Address</label>
               <input className='input' type="text" name="address" value={formData.address} onChange={handleChange} />
+            </div>
+            <div className="item">
+              <label>Username</label>
+              <input className='input' type="text" name="username" value={formData.username} onChange={handleChange} />
+            </div>
+            <div className="item">
+              <label>Password</label>
+              <input className='input' type="password" name="password" value={formData.password} onChange={handleChange} />
             </div>
             <button type="submit">Add Staff</button>
           </form>

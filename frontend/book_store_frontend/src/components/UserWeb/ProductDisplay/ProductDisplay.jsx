@@ -1,6 +1,5 @@
 import React from 'react'
 import defaultImage from '../../../assets/no_book_cover.jpg'
-import { addToCart } from '../../../service/CartService'
 import './ProductDisplay.css'
 import { useAuth } from '../../../hooks/AuthProvider'
 
@@ -9,17 +8,6 @@ const ProductDisplay = (props) => {
     const image = book.book_cover || defaultImage;
     const { getCurrentCustomer } = useAuth();
 
-    const handleAddToCart = () => {
-        const currentCustomer = getCurrentCustomer();
-        console.log(currentCustomer)
-        addToCart(currentCustomer.id, book.id, 1, currentCustomer.token)
-            .then(response => {
-                console.log('Item added to cart:', response.data);
-            })
-            .catch(error => {
-                console.error('Error adding item to cart:', error);
-            });
-    };
 
     return (
         <div className='product-display'>
@@ -51,7 +39,7 @@ const ProductDisplay = (props) => {
                     <button>BUY</button>
                 </div>
                 <div className='product-display-right-add-cart-button'>
-                    <button onClick={handleAddToCart}>ADD TO CART</button>
+                    <button>ADD TO CART</button>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:8080/admin/customer-management";
+const baseURL = "http://localhost:8080/admin";
 
 const getCustomers = async () => {
   try {
@@ -13,7 +13,7 @@ const getCustomers = async () => {
 };
 
 const getCustomerDataByID = async (customerID) => {
-  return axios.get(`http://localhost:8080/admin/customer-management/customers/${customerID}`)
+  return axios.get(`${baseURL}/customers/${customerID}`)
   .then(response => {
       if (response.status === 200) {
           console.log("fetch data")
@@ -32,7 +32,7 @@ const getCustomerDataByID = async (customerID) => {
 
 const createCustomer = async (customerData) => {
   try {
-    const response = await axios.post(baseURL, customerData);
+    const response = await axios.post(`${baseURL}/customers`, customerData);
     return response.data;
   } catch (error) {
     console.error("Error creating customer:", error);
