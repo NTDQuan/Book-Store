@@ -6,6 +6,7 @@ import AdminCategoryContainer from "./Pages/AdminPanel/CategoryList/CategoryList
 import AdminHomeContainer from "./Pages/AdminPanel/Home/Home";
 import StaffListPage from "./Pages/AdminPanel/StaffList/StaffListPage";
 import CustomerListPage from "./Pages/AdminPanel/CustomerList/CustomerListPage";
+import OrderListPage from "./Pages/AdminPanel/OrderList/OrderListPage";
 import AdminLogin from "./Pages/AdminPanel/Auth/AdminLogin"; // Import AdminLogin
 import PrivateRoute from "./components/Common/PrivateRoute"; // Import PrivateRoute
 import "./Styles/global.css";
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
           {
             path: "customer", // Route for Customer
             element: <CustomerListPage />,
+          },
+          {
+            path: "order", // Route for Customer
+            element: <OrderListPage />,
           },
         ],
       },

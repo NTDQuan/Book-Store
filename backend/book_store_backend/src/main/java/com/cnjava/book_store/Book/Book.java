@@ -1,7 +1,11 @@
 package com.cnjava.book_store.Book;
 
+import java.util.List;
+
 import com.cnjava.book_store.Author.Author;
 import com.cnjava.book_store.Category.Category;
+import com.cnjava.book_store.Order.OrderItem;
+// import com.cnjava.book_store.Order.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -13,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,6 +37,12 @@ public class Book {
 	@ManyToOne()
 	@JoinColumn(name = "category_id", nullable = true)
 	private Category category;
+    
+	// @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+	// private List<OrderItem> orderItems;
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<OrderItem> orderItems;
+
 	private String book_cover;
 	private int stock;
 	private String description;

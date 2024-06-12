@@ -1,12 +1,18 @@
 package com.cnjava.book_store.Customer;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.util.List;
+
+import com.cnjava.book_store.Order.Order;
 
 @Entity
 @Table(name = "customer")
@@ -90,5 +96,8 @@ public class Customer {
 		this.phoneNumber = phoneNumber;
 	}
     
-    
+    // @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    // private List<Order> orders;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders;
 }
