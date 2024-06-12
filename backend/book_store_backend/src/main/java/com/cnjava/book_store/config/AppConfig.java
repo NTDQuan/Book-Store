@@ -21,6 +21,7 @@ public class AppConfig {
     public AppConfig(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+    
 	
 	@Bean
 	public RestTemplate restTemplate() {

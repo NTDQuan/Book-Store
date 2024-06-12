@@ -25,7 +25,7 @@ public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
     }
     
     private void loadRoles() {
-        RoleEnum[] roleNames = new RoleEnum[] { RoleEnum.USER, RoleEnum.STAFF, RoleEnum.ADMIN };
+        RoleEnum[] roleNames = new RoleEnum[] { RoleEnum.ROLE_USER, RoleEnum.ROLE_STAFF, RoleEnum.ROLE_ADMIN };
 
         Arrays.stream(roleNames).forEach((roleName) -> {
             Optional<Role> optionalRole = roleRepository.findByName(roleName);

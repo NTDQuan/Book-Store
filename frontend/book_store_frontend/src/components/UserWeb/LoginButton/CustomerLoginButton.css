@@ -1,0 +1,21 @@
+.customer-login-button-container {
+    width: 250px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.customer-login-button-container button {
+    width: 170px;
+    height: 50px;
+    border-radius: 40px;
+    background: #FA7C54;
+    border: none;
+    color: #FFFFFF;
+    font-size: 20px;
+    line-height: 23px;
+    font-weight: 400;
+    cursor: pointer;
+}
+

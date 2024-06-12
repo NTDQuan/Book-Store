@@ -1,0 +1,9 @@
+.book-list-page {
+    padding: 20px;
+}
+
+.book-list-page .products {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 80px;
+}

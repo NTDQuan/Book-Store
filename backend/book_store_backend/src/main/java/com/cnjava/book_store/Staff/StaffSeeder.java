@@ -48,7 +48,7 @@ public class StaffSeeder implements ApplicationListener<ContextRefreshedEvent> {
         staffDto.setPhoneNumber("0987654321");
         staffDto.setFullName("Admin");
 
-        Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.ADMIN);
+        Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.ROLE_ADMIN);
         Optional<User> optionalUser = userRepository.findByUsername(staffDto.getUsername());
 
         if (optionalRole.isEmpty() || optionalUser.isPresent()) {

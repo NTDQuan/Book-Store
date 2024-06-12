@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+const base_url = 'http://localhost:8080'
+
 export function getBooksData() {
-    return axios.get('http://localhost:8080/admin/book-managerment/books')
+    return axios.get(`${base_url}/public/books`)
     .then(response => {
         if (response.status === 200) {
             console.log("fetch data")
@@ -19,7 +21,7 @@ export function getBooksData() {
 
 export const addBook = async (bookData) => {
     try {
-      const response = await fetch('http://localhost:8080/admin/book-managerment', {
+      const response = await fetch(`${base_url}/admin/new-book`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +42,7 @@ export const addBook = async (bookData) => {
 
 export const deleteBook = async (bookID) => {
     try {
-        const response = await fetch(`http://localhost:8080/admin/book-managerment/books/${bookID}`, {
+        const response = await fetch(`${base_url}/books/${bookID}`, {
             method: "DELETE"
         });
         if (!response.ok) {
@@ -53,7 +55,7 @@ export const deleteBook = async (bookID) => {
 }
 
 export const getBooksDataByID = async (bookID) => {
-  return axios.get(`http://localhost:8080/admin/book-managerment/books/${bookID}`)
+  return axios.get(`${base_url}/books/${bookID}`)
   .then(response => {
       if (response.status === 200) {
           console.log("fetch data")
@@ -71,7 +73,7 @@ export const getBooksDataByID = async (bookID) => {
 
 export const updateBook = async (bookID, bookData) => {
     try {
-      const response = await fetch(`http://localhost:8080/admin/book-managerment/books/${bookID}`, {
+      const response = await fetch(`${base_url}/books/${bookID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

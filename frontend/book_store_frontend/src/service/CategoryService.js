@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+const base_url = 'http://localhost:8080'
+
 export function getCategoriesData() {
-    return axios.get('http://localhost:8080/admin/category-managerment/categories')
+    return axios.get(`${base_url}/public/categories`)
     .then(response => {
         if (response.status === 200) {
             console.log("fetch data")
@@ -18,7 +20,7 @@ export function getCategoriesData() {
 }
 
 export const getCategoryDataByID = async (categoryID) => {
-  return axios.get(`http://localhost:8080/admin/category-managerment/categories/${categoryID}`)
+  return axios.get(`${base_url}/public/categories/${categoryID}`)
   .then(response => {
       if (response.status === 200) {
           console.log("fetch data")
@@ -36,7 +38,7 @@ export const getCategoryDataByID = async (categoryID) => {
 
 export const addCategory = async (categoryData) => {
     try {
-      const response = await fetch('http://localhost:8080/admin/category-managerment', {
+      const response = await fetch(`${base_url}/admin/new-category`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +59,7 @@ export const addCategory = async (categoryData) => {
 
 export const deleteCategory = async (categoryID) => {
     try {
-        const response = await fetch(`http://localhost:8080/admin/category-managerment/categories/${categoryID}`, {
+        const response = await fetch(`${base_url}/admin/categories/${categoryID}`, {
             method: "DELETE"
         });
         if (!response.ok) {
@@ -71,7 +73,7 @@ export const deleteCategory = async (categoryID) => {
 
 export const updateCategory = async (categoryID, categoryData) => {
   try {
-    const response = await fetch(`http://localhost:8080/admin/category-managerment/categories/${categoryID}`, {
+    const response = await fetch(`${base_url}/admin/categories/${categoryID}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

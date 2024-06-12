@@ -46,7 +46,7 @@ public class AuthenticationService {
         }
     
     public User registerCustomer(RegisterCustomerDto input) {
-    	Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.USER);
+    	Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.ROLE_USER);
         if (optionalRole.isEmpty()) {
             return null;
         }
@@ -64,7 +64,7 @@ public class AuthenticationService {
     }
     
     public User registerStaff(RegisterStaffDto input) {
-    	Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.STAFF);
+    	Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.ROLE_STAFF);
         if (optionalRole.isEmpty()) {
             return null;
         }
