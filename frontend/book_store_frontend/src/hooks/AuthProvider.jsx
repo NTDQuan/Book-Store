@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
                   };
                 setCustomer(customerData);
                 console.log(customer)
-                localStorage.setItem("user", JSON.stringify(customerData));
+                localStorage.setItem("customer", JSON.stringify(customerData));
                 navigate("/");
                 return;
             }
@@ -70,14 +70,23 @@ const AuthProvider = ({ children }) => {
         return JSON.parse(localStorage.getItem('user'))
     }
 
+    const getCurrentCustomer = () => {
+        return JSON.parse(localStorage.getItem('customer'))
+    }
+
     const logOut = () => {
         setUser(null);
         localStorage.removeItem("user");
         navigate("admin/login");
       };
 
+    const customerLogOut = () => {
+        setCustomer(null);
+        localStorage.removeItem("customer");
+    }
+
     return (
-        <AuthContext.Provider value={{ user, loginAction, loginCustomerAction, logOut, getCurrentUser}}>
+        <AuthContext.Provider value={{ user, customer, loginAction, loginCustomerAction, logOut, getCurrentUser, customerLogOut, getCurrentCustomer}}>
             {children}
         </AuthContext.Provider>
     );
