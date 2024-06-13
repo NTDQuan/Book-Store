@@ -25,6 +25,7 @@ const OrderListPage = () => {
   };
 
   const handleAdd = async (newOrderData) => {
+    console.log('Adding Order:', newOrderData);
     try {
       await createOrder(newOrderData);
       setAddModalVisible(false);
@@ -35,6 +36,7 @@ const OrderListPage = () => {
   };
 
   const handleEdit = async (orderId, updatedOrderData) => {
+    console.log('Updating Order:', updatedOrderData);
     try {
       await updateOrder(orderId, updatedOrderData);
       setEditModalVisible(false);

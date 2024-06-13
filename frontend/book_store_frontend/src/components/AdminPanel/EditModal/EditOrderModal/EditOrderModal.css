@@ -16,6 +16,7 @@
   border-radius: 8px;
   width: 600px;
   max-width: 100%;
+  color: black;
 }
 
 .form-group {
@@ -25,6 +26,7 @@
 .form-group label {
   display: block;
   margin-bottom: 5px;
+  color: black;
 }
 
 .form-group input,
