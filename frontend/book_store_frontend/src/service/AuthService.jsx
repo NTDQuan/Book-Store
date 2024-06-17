@@ -10,7 +10,7 @@ export default function authHeader() {
 
 export const registerUser = async (input) => {
     try {
-      const response = await fetch('http://localhost:8080/auth/signup', {
+      const response = await fetch('http://localhost:8080/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export const registerUser = async (input) => {
 
   export const registerStaff = async (input) => {
     try {
-      const response = await fetch('http://localhost:8080/auth/admin/signup', {
+      const response = await fetch('http://localhost:8080/auth/admin/staff-register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

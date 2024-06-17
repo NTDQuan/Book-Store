@@ -1,10 +1,21 @@
 import axios from "axios";
+import authHeader from './AuthService'
 
 const baseURL = "http://localhost:8080/admin";
 
+const withAuthHeader = (config) => {
+  return {
+      ...config,
+      headers: {
+          ...config.headers,
+          ...authHeader()
+      }
+  };
+};
+
 const getStaffs = async () => {
   try {
-    const response = await axios.get(`${baseURL}/staffs`);
+    const response = await axios.get(`${baseURL}/staffs`, withAuthHeader());
     return response.data;
   } catch (error) {
     console.error("Error fetching staff data:", error);
@@ -13,25 +24,18 @@ const getStaffs = async () => {
 };
 
 const getStaffDataByID = async (staffID) => {
-  return axios.get(`${baseURL}/staffs/${staffID}`)
-  .then(response => {
-      if (response.status === 200) {
-          console.log("fetch data")
-          return response.data
-      } else {
-          throw new Error("Failed to fetch categories")
-      }
-          
-  })
-  .catch(error => {
-      console.log(error)
-      throw error;
-  })
-}
+  try {
+    const response = await axios.get(`${baseURL}/staffs/${staffID}`, withAuthHeader());
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching staff data:", error);
+    throw error;
+  }
+};
 
 const createStaff = async (staffData) => {
   try {
-    const response = await axios.post(baseURL, staffData);
+    const response = await axios.post(`${baseURL}/staffs`, staffData, withAuthHeader());
     return response.data;
   } catch (error) {
     console.error("Error creating staff:", error);
@@ -41,7 +45,7 @@ const createStaff = async (staffData) => {
 
 const updateStaff = async (staffId, updatedStaffData) => {
   try {
-    const response = await axios.put(`${baseURL}/staffs/${staffId}`, updatedStaffData);
+    const response = await axios.put(`${baseURL}/staffs/${staffId}`, updatedStaffData, withAuthHeader());
     return response.data;
   } catch (error) {
     console.error(`Error updating staff with ID ${staffId}:`, error);
@@ -51,7 +55,7 @@ const updateStaff = async (staffId, updatedStaffData) => {
 
 const deleteStaff = async (staffId) => {
   try {
-    const response = await axios.delete(`${baseURL}/staffs/${staffId}`);
+    const response = await axios.delete(`${baseURL}/staffs/${staffId}`, withAuthHeader());
     return response.data;
   } catch (error) {
     console.error(`Error deleting staff with ID ${staffId}:`, error);

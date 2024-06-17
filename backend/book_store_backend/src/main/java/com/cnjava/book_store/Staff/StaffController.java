@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.cnjava.book_store.User.UserService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,12 +15,10 @@ import java.util.stream.Collectors;
 public class StaffController {
 
     private final StaffService staffService;
-    private final UserService userService;
 
     @Autowired
-    public StaffController(StaffService staffService, UserService userService) {
+    public StaffController(StaffService staffService) {
         this.staffService = staffService;
-        this.userService = userService;
     }
     
     @GetMapping("/staffs")
