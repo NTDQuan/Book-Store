@@ -11,6 +11,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,14 +22,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.cnjava.book_store.Role.Role; 
-
 @Entity
+@Data
 @Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails  {
@@ -42,14 +44,8 @@ public class User implements UserDetails  {
 	@Column(nullable = false)
 	private String password;
 	
-	@Column(nullable = false, unique = true)
-	@ManyToMany
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-        )
-	private Set<Role> roles;
+	@Enumerated(EnumType.STRING)
+	private Role roles;
 	
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
@@ -61,13 +57,7 @@ public class User implements UserDetails  {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-    	Set<Role> roles = this.getRoles();
-    	List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-    	
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName().toString()));
-        }
-        return authorities;
+    	return List.of(new SimpleGrantedAuthority("ROLE_" + roles.name()));
     }
     
     @Override
@@ -98,11 +88,11 @@ public class User implements UserDetails  {
 		this.id = id;
 	}
 	
-	public Set<Role> getRoles() {
+	public Role getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(Role roles) {
 		this.roles = roles;
 	}
 

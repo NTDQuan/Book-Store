@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
                 const userData = {
                     id: res.id,
                     token: res.token,
-                    role: res.role[0]
+                    role: res.role
                   };
                 setUser(userData);
                 console.log(user)
@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
                 const customerData = {
                     id: res.id,
                     token: res.token,
-                    role: res.role[0]
+                    role: res.role
                   };
                 setCustomer(customerData);
                 console.log(customer)
