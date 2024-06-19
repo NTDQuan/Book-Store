@@ -13,11 +13,6 @@ import com.cnjava.book_store.User.User;
 @Entity
 @Table(name = "staff")
 public class Staff extends User {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(nullable = false, length = 255)
     private String fullName;
 
@@ -37,13 +32,13 @@ public class Staff extends User {
     private String password;
 
     // Getters and Setters
-    public long getId() {
-        return id;
-    }
+    // public long getId() {
+    //     return id;
+    // }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // public void setId(Long id) {
+    //     this.id = id;
+    // }
     public String getFullName() {
         return fullName;
     }
