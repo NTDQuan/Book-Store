@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
@@ -15,6 +16,17 @@ const Navbar = () => {
     navigate('/admin/login');
   };
 
+=======
+import React from 'react'
+import logo from '../../../assets/logo.svg'
+import notificationIcon from '../../../assets/notification.svg'
+import Avatar from '../../General/Avatar/Avatar'
+import { useAuth } from '../../../hooks/AuthProvider';
+import './NavBar.css'
+
+const NavBar = () => {
+  const { user } = useAuth();
+>>>>>>> a361e26078890e2da368369e4ae9618d02da7ab5
   return (
     <div className='navbar'>
       <div className='logo'>
@@ -29,8 +41,11 @@ const Navbar = () => {
         {/* Thêm nút Logout */}
         <div className="user">
           <Avatar className="user"/>
+<<<<<<< HEAD
           <span>User name</span>
           <button onClick={handleLogout} className="logout-button">Logout</button>
+=======
+>>>>>>> a361e26078890e2da368369e4ae9618d02da7ab5
         </div>
       </div>
     </div>

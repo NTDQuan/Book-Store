@@ -3,6 +3,7 @@ import { getStaffs, createStaff, updateStaff, deleteStaff } from '../../../servi
 import AddStaffModal from '../../../components/AdminPanel/AddModal/AddStaffModal/AddStaffModal';
 import EditStaffModal from '../../../components/AdminPanel/EditModal/EditStaffModal/EditStaffModal';
 import DataTable from '../../../components/AdminPanel/DataTable/DataTable';
+import { registerStaff } from '../../../service/AuthService';
 import './StaffListPage.css';
 
 const StaffListPage = () => {
@@ -36,7 +37,7 @@ const StaffListPage = () => {
 
   const handleAdd = async (newStaffData) => {
     try {
-      await createStaff(newStaffData);
+      await registerStaff(newStaffData);
       setAddModalVisible(false);
       fetchStaffs();
     } catch (error) {

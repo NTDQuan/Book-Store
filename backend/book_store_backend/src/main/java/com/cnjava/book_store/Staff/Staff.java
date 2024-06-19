@@ -8,13 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 
+import com.cnjava.book_store.User.User;
+
 @Entity
 @Table(name = "staff")
-public class Staff {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Staff extends User {
     @Column(nullable = false, length = 255)
     private String fullName;
 
@@ -27,6 +25,7 @@ public class Staff {
     @Column(nullable = false, length = 255)
     private String address;
 
+<<<<<<< HEAD
     @Column(nullable = false, length = 255)
     private String username;
 
@@ -42,6 +41,8 @@ public class Staff {
         this.id = id;
     }
 
+=======
+>>>>>>> a361e26078890e2da368369e4ae9618d02da7ab5
     public String getFullName() {
         return fullName;
     }

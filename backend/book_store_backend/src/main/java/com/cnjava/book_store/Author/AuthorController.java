@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin("*")
-@RequestMapping("/admin/author-managerment")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/")
 public class AuthorController {
 	AuthorService authorService;
 	
@@ -28,12 +28,12 @@ public class AuthorController {
 		this.authorService = authorService;
 	}
 	
-	@GetMapping("/authors")
+	@GetMapping("public/authors")
 	public ResponseEntity<List<Author>> findAllAuthors() {
 		return ResponseEntity.ok(authorService.findAll());
 	}
 	
-	@GetMapping("/authors/{id}")
+	@GetMapping("public/authors/{id}")
 	public ResponseEntity<Author> getAuthorById(@PathVariable Long id) {
 		Author foundedAuthor = authorService.getAuthorById(id);
 		if(foundedAuthor != null) {
@@ -42,14 +42,14 @@ public class AuthorController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}	
 	
-	@PostMapping()
+	@PostMapping("admin/new-author")
 	public ResponseEntity<Map<String, String>> addNewAuthor(@RequestBody Author newAuthor) {
 		authorService.createAuthor(newAuthor);
 		Map<String, String> response = Collections.singletonMap("message", "Author added successfully");
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/authors/{id}")
+	@DeleteMapping("admin/authors/{id}")
 	public ResponseEntity<String> deleteAuthorById(@PathVariable Long id) {
 		boolean deleted = authorService.deleteAuthorById(id);
 		if(deleted) {
@@ -58,7 +58,7 @@ public class AuthorController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@PutMapping("/authors/{id}")
+	@PutMapping("admin/authors/{id}")
 	public ResponseEntity<Map<String, String>> updateAuthor(@PathVariable Long id, @RequestBody Author updatedAuthor) {
 		boolean updated = authorService.updateAuthor(id, updatedAuthor);
 		Map<String, String> response = Collections.singletonMap("message", "Category updated successfully");

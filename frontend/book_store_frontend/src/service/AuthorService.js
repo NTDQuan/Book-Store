@@ -1,89 +1,79 @@
-import axios from 'axios'
+import axios from 'axios';
+import authHeader from './AuthService'
+const base_url = 'http://localhost:8080';
 
-export function getAuthorsData() {
-    return axios.get('http://localhost:8080/admin/author-managerment/authors')
-    .then(response => {
-        if (response.status === 200) {
-            return response.data
-        } else {
-            throw new Error("Failed to fetch authors")
+const withAuthHeader = (config) => {
+    return {
+        ...config,
+        headers: {
+            ...config.headers,
+            ...authHeader()
         }
-            
-    })
-    .catch(error => {
-        console.log(error)
-        throw error;
-    })
-}
+    };
+};
+
+export const getAuthorsData = () => {
+    return axios.get(`${base_url}/public/authors`)
+        .then(response => {
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error("Failed to fetch authors");
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching authors:", error);
+            throw error;
+        });
+};
 
 export const getAuthorDataByID = async (authorID) => {
-  return axios.get(`http://localhost:8080/admin/author-managerment/authors/${authorID}`)
-  .then(response => {
-      if (response.status === 200) {
-          return response.data
-      } else {
-          throw new Error("Failed to fetch categories")
-      }
-          
-  })
-  .catch(error => {
-      console.log(error)
-      throw error;
-  })
-}
+    try {
+        const response = await axios.get(`${base_url}/public/authors/${authorID}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching author:", error);
+        throw error;
+    }
+};
 
 export const addAuthor = async (authorData) => {
     try {
-      const response = await fetch('http://localhost:8080/admin/author-managerment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(authorData),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Network response was not ok' + response.statusText);
-      }
-  
-      return await response.json();
+        const requestConfig = withAuthHeader({
+            method: 'POST',
+            url: `${base_url}/admin/new-author`,
+            data: authorData,
+        });
+
+        console.log('Request Header:', requestConfig.headers);
+        console.log('Request Body:', authorData);
+
+        const response = await axios(requestConfig);
+        return response.data;
     } catch (error) {
-      console.error('Error:', error);
-      throw error;
+        console.error("Error adding author:", error);
+        throw error;
     }
-  };
+};
 
 export const deleteAuthor = async (authorID) => {
     try {
-        const response = await fetch(`http://localhost:8080/admin/author-managerment/authors/${authorID}`, {
-            method: "DELETE"
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok' + response.statusText);
+        const response = await axios.delete(`${base_url}/admin/authors/${authorID}`, withAuthHeader({}));
+        if (response.status !== 204) {
+            throw new Error("Failed to delete author");
         }
-    } catch(error) {
-        console.log(error)
+    } catch (error) {
+        console.error("Error deleting author:", error);
         throw error;
     }
-}
+};
 
 export const updateAuthor = async (authorID, authorData) => {
-  try {
-    const response = await fetch(`http://localhost:8080/admin/author-managerment/authors/${authorID}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(authorData),
-    });
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok' + response.statusText);
+    try {
+        const response = await axios.put(`${base_url}/admin/authors/${authorID}`, authorData, withAuthHeader({}));
+        return response.data;
+    } catch (error) {
+        console.error("Error updating author:", error);
+        throw error;
     }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
 };
