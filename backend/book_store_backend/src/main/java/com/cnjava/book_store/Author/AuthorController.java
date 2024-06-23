@@ -50,10 +50,10 @@ public class AuthorController {
 	}
 	
 	@DeleteMapping("admin/authors/{id}")
-	public ResponseEntity<String> deleteAuthorById(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteAuthorById(@PathVariable Long id) {
 		boolean deleted = authorService.deleteAuthorById(id);
 		if(deleted) {
-			return new ResponseEntity<>("Author deleted successfully", HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}

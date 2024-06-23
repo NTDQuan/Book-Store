@@ -8,6 +8,15 @@ export default function authHeader() {
     }
 }
 
+export function authCustomerHeader() {
+  const user = JSON.parse(localStorage.getItem('customer'))
+  if(user && user.token) {
+    return { Authorization: 'Bearer ' + user.token }
+} else {
+    return {}
+}
+}
+
 export const registerUser = async (input) => {
     try {
       const response = await fetch('http://localhost:8080/auth/register', {

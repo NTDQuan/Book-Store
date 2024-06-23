@@ -60,7 +60,7 @@ export const deleteBook = async (bookID) => {
 };
 
 export const getBooksDataByID = async (bookID) => {
-  return axios.get(`${base_url}/books/${bookID}`)
+  return axios.get(`${base_url}/public/books/${bookID}`)
   .then(response => {
       if (response.status === 200) {
           console.log("fetch data")

@@ -14,8 +14,11 @@ import { PrivateAdminRoute, PrivateCustomerRoute } from "./route/PrivateRoute";
 import AuthProvider from "./hooks/AuthProvider";
 import Register from "./Pages/UserWeb/CustomerRegistration/CustomerRegistration";
 import CustomerBookListPage from "./Pages/UserWeb/BookList/CustomerBookListPage";
+import CreateOrderPage from "./Pages/UserWeb/CreateOrder/CreateOrderPage";
 import ProductContextProvider from "./hooks/ProductContext";
 import ProductDetailPage from "./Pages/UserWeb/Product_Detail/Product_Detail"
+import CartPage from "./Pages/UserWeb/Cart/Cart";
+import CustomerOrderList from "./Pages/UserWeb/OrderList/OrderList";
 
 function App() {
   return (
@@ -41,6 +44,9 @@ function App() {
                 <Route path="/" element={<MainPage />} />
                 <Route path="/books" element={<CustomerBookListPage />}/>
                 <Route path="/books/:bookID" element={<ProductDetailPage/>}/>
+                <Route path="/cart" element={<CartPage/>}/>
+                <Route path="/create-order" element={<CreateOrderPage />} />
+                <Route path="/your-order" element={<CustomerOrderList />} />
               </Route>
             </Routes>
           </ProductContextProvider>

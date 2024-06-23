@@ -64,8 +64,8 @@ export const addCategory = async (categoryData) => {
 
 export const deleteCategory = async (categoryID) => {
   try {
-      const response = await axios.delete(`${base_url}/admin/categories/${categoryID}`, withAuthHeader);
-      if (!response.ok) {
+      const response = await axios.delete(`${base_url}/admin/categories/${categoryID}`, withAuthHeader({}));
+      if (response.status !== 200) {
           throw new Error('Network response was not ok' + response.statusText);
       }
   } catch(error) {

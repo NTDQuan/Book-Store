@@ -45,9 +45,9 @@ const CategoryListPage = () => {
       try {
         await deleteCategory(id);
         refreshCategories();
-        alert('Category deleted succesfully');
+        alert('Category deleted successfully');
       } catch (error) {
-        console.error('Error deleting category');
+        console.error('Error deleting category', error);
       }
     };
 

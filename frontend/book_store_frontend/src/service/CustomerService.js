@@ -15,7 +15,7 @@ const withAuthHeader = (config) => {
 
 const getCustomers = async () => {
   try {
-    const response = await axios.get(`${baseURL}/customers`, withAuthHeader());
+    const response = await axios.get(`${baseURL}/customers`, withAuthHeader({}));
     return response.data;
   } catch (error) {
     console.error("Error fetching customer data:", error);
@@ -25,7 +25,7 @@ const getCustomers = async () => {
 
 const getCustomerDataByID = async (customerID) => {
   try {
-    const response = await axios.get(`${baseURL}/customers/${customerID}`, withAuthHeader());
+    const response = await axios.get(`${baseURL}/customers/${customerID}`, withAuthHeader({}));
     return response.data;
   } catch (error) {
     console.error("Error fetching customer data:", error);
@@ -35,7 +35,7 @@ const getCustomerDataByID = async (customerID) => {
 
 const createCustomer = async (customerData) => {
   try {
-    const response = await axios.post(`${baseURL}/customers`, customerData, withAuthHeader());
+    const response = await axios.post(`${baseURL}/customers`, customerData, withAuthHeader({}));
     return response.data;
   } catch (error) {
     console.error("Error creating customer:", error);
@@ -59,7 +59,7 @@ const updateCustomer = async (customerId, updatedCustomerData) => {
 
 const deleteCustomer = async (customerId) => {
   try {
-    const response = await axios.delete(`${baseURL}/customers/${customerId}`, withAuthHeader());
+    const response = await axios.delete(`${baseURL}/customers/${customerId}`, withAuthHeader({}));
     return response.data;
   } catch (error) {
     console.error(`Error deleting customer with ID ${customerId}:`, error);
