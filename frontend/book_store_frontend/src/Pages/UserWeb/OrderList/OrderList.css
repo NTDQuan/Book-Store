@@ -1,0 +1,76 @@
+.order-list {
+    padding: 50px;
+    width: 100%;
+    height: fit-content;
+}
+
+.order-list .order-list-container .order-list-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-list .order-list-container .order-list-content .order-list-order {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    border-radius: 8px;
+} 
+
+.order-list .order-list-container .order-list-content .order-list-order .order-list-order-id {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    word-wrap: break-word; 
+}
+
+.order-list .order-list-container .order-list-content .order-list-order .order-list-order-date {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    overflow-wrap: break-word;
+}
+
+.order-list .order-list-container .order-list-content .order-list-order .order-list-order-item {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    word-wrap: break-word; 
+}
+
+.order-list .order-list-container .order-list-content .order-list-order .order-list-order-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 20%;
+    overflow-wrap: break-word;
+}
+
+.order-list .order-list-container .order-list-content .order-list-order .order-list-order-price {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    word-wrap: break-word; 
+}
+
+.order-list .order-list-container .order-list-content .order-list-order .order-list-order-price p {
+    color: #FF5858;
+}
+
+.order-list .order-list-container .order-list-content .order-list-order .order-list-order-status {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    word-wrap: break-word; 
+}
+
+.order-status-refused {
+    color: #ff0101;
+}
+
+.order-status-confirmed {
+    color: #20c911;
+}
+

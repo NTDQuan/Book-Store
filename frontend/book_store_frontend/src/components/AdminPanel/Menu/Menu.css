@@ -19,6 +19,11 @@
     border-radius: 5px;
 }
 
+.menu .item .listItem img {
+    width: 29px;
+    height: 29px;
+}
+
 .menu .item .listItem:hover {
     background-color: var(--soft-color);
 }

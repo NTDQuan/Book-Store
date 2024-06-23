@@ -1,0 +1,97 @@
+.cart {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background: #F3F3F7;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart .cart-content {
+    background: white;
+    height: fit-content;
+    border-radius: 4px;
+    width: 600px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cart .cart-content .cart-divider {
+    border-top: 1px solid #CFCFCF;
+}
+
+.cart .cart-content .cart-content-info {
+    padding: 24px;
+}
+
+.cart .cart-content .cart-content-info .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart .cart-content .cart-content-info .cart-item .cart-item-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart .cart-content .cart-content-info .cart-item .cart-item-left .cart-item-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #4D4D4D;
+}
+
+.cart .cart-content .cart-content-info .cart-item .cart-item-left .cart-item-remove {
+    font-size: 14px;
+    color: #6D6E72;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cart .cart-content .cart-content-info .cart-item .cart-item-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart .cart-content .cart-content-info .cart-item .cart-item-right input {
+    width: 80px;
+    height: 32px;
+}
+
+.cart .cart-content .cart-content-info .cart-item .cart-item-right p {
+    font-weight: 600;
+    font-size: 16px;
+    color: #FF5858;
+    margin-bottom: 8px;
+}
+
+.cart .cart-content .cart-content-info .total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.cart .cart-content .cart-content-info .total .total-title {
+    font-size: 18px;
+}
+
+.cart .cart-content .cart-content-info .total .total-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: #FF5858;
+}
+
+.cart .cart-content .cart-content-info button {
+    width: 100%;
+    background-color: #FA7C54;
+    color: #FFFFFF;
+    border: none;
+    padding: 20px;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
