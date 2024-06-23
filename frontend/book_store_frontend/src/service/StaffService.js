@@ -15,7 +15,7 @@ const withAuthHeader = (config) => {
 
 const getStaffs = async () => {
   try {
-    const response = await axios.get(`${baseURL}/staffs`, withAuthHeader());
+    const response = await axios.get(`${baseURL}/staffs`, withAuthHeader({}));
     return response.data;
   } catch (error) {
     console.error("Error fetching staff data:", error);
@@ -25,7 +25,7 @@ const getStaffs = async () => {
 
 const getStaffDataByID = async (staffID) => {
   try {
-    const response = await axios.get(`${baseURL}/staffs/${staffID}`, withAuthHeader());
+    const response = await axios.get(`${baseURL}/staffs/${staffID}`, withAuthHeader({}));
     return response.data;
   } catch (error) {
     console.error("Error fetching staff data:", error);
@@ -35,7 +35,7 @@ const getStaffDataByID = async (staffID) => {
 
 const createStaff = async (staffData) => {
   try {
-    const response = await axios.post(`${baseURL}/staffs`, staffData, withAuthHeader());
+    const response = await axios.post(`${baseURL}/staffs`, staffData, withAuthHeader({}));
     return response.data;
   } catch (error) {
     console.error("Error creating staff:", error);
@@ -45,7 +45,7 @@ const createStaff = async (staffData) => {
 
 const updateStaff = async (staffId, updatedStaffData) => {
   try {
-    const response = await axios.put(`${baseURL}/staffs/${staffId}`, updatedStaffData, withAuthHeader());
+    const response = await axios.put(`${baseURL}/staffs/${staffId}`, updatedStaffData, withAuthHeader({}));
     return response.data;
   } catch (error) {
     console.error(`Error updating staff with ID ${staffId}:`, error);
@@ -55,7 +55,7 @@ const updateStaff = async (staffId, updatedStaffData) => {
 
 const deleteStaff = async (staffId) => {
   try {
-    const response = await axios.delete(`${baseURL}/staffs/${staffId}`, withAuthHeader());
+    const response = await axios.delete(`${baseURL}/staffs/${staffId}`, withAuthHeader({}));
     return response.data;
   } catch (error) {
     console.error(`Error deleting staff with ID ${staffId}:`, error);

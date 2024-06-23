@@ -60,6 +60,19 @@ const OrderList = () => {
         }
     };
 
+    const getStatusClass = (status) => {
+        switch (status) {
+          case 'REFUSED':
+            return 'order-status-refused';
+          case 'CONFIRMED':
+            return 'order-status-confirmed';
+          case 'PENDING':
+            return 'order-status-pending';
+          default:
+            return '';
+        }
+      };
+
     return (
         <div className='admin-order-list'>
         <div className='admin-order-list-container'>
@@ -119,7 +132,7 @@ const OrderList = () => {
                     <div className='admin-order-list-order-price'>
                         <p>${order.totalPrice.toFixed(2)}</p>
                     </div>
-                    <div className='admin-order-list-order-status'>
+                    <div className={`admin-order-list-order-status ${getStatusClass(order.status)}`}>
                         <p>{order.status}</p>
                     </div>
                     <div className='admin-order-list-order-action'>

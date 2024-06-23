@@ -36,6 +36,19 @@ const OrderList = () => {
         console.error('Error fetching orders:', error);
       }
     };
+
+    const getStatusClass = (status) => {
+        switch (status) {
+          case 'REFUSED':
+            return 'order-status-refused';
+          case 'CONFIRMED':
+            return 'order-status-confirmed';
+          case 'PENDING':
+            return 'order-status-pending';
+          default:
+            return '';
+        }
+    };
   
     return (
       <div className='order-list'>
@@ -84,7 +97,7 @@ const OrderList = () => {
                 <div className='order-list-order-price'>
                   <p>${order.totalPrice.toFixed(2)}</p>
                 </div>
-                <div className='order-list-order-status'>
+                <div className={`order-list-order-status ${getStatusClass(order.status)}`}>
                   <p>{order.status}</p>
                 </div>
               </div>

@@ -107,17 +107,16 @@ public class CartService {
     }
 
     @Transactional
-    public void deleteCartItem(Long cartId, Long cartItemId) {
+    public void deleteCartItem(Long cartId, Long bookId) {
         Cart cart = cartRepository.findById(cartId)
                 .orElseThrow(() -> new IllegalArgumentException("Cart not found"));
-        CartItem cartItem = cartItemRepository.findById(cartItemId)
-                .orElseThrow(() -> new IllegalArgumentException("CartItem not found"));
         
-        // Ensure that the CartItem belongs to the specified Cart
-        if (!cart.getCartItems().contains(cartItem)) {
-            throw new IllegalArgumentException("CartItem does not belong to the cart");
-        }
-
+        // Find the CartItem in the Cart by bookId
+        CartItem cartItem = cart.getCartItems().stream()
+                .filter(item -> item.getBook().getId() == bookId)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("CartItem not found for bookId: " + bookId));
+        
         cart.getCartItems().remove(cartItem);
         cartItemRepository.delete(cartItem);
 

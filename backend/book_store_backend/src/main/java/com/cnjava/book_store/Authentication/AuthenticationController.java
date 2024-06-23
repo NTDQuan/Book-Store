@@ -34,6 +34,7 @@ public class AuthenticationController {
 	}
 	
 	@PostMapping("/admin/staff-register")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<AuthenticationResponse> staffRegister(@RequestBody Staff request) {
 		return ResponseEntity.ok(authService.staffRegister(request));
 	}

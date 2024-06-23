@@ -55,13 +55,13 @@ public class CartController {
         return ResponseEntity.ok(cartDTO);
     }
     
-    @DeleteMapping("/items/{cartItemId}")
-    public ResponseEntity<CartDTO> removeCartItem(@PathVariable Long cartItemId) {
+    @DeleteMapping("/items/{bookId}")
+    public ResponseEntity<CartDTO> removeCartItem(@PathVariable Long bookId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
         User currentUser = userRepository.findByUsername(currentUsername).orElseThrow(() -> new IllegalArgumentException("User not found"));
         CartDTO cartDTO = cartService.getOrCreateCartDTO(currentUser.getId());
-        cartService.deleteCartItem(cartDTO.getId(), cartItemId);
+        cartService.deleteCartItem(cartDTO.getId(), bookId);
         // Fetch the updated cart details
         CartDTO updatedCartDTO = cartService.getOrCreateCartDTO(currentUser.getId());
         return ResponseEntity.ok(updatedCartDTO);

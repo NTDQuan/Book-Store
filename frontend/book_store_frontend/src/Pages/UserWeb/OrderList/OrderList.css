@@ -66,3 +66,11 @@
     word-wrap: break-word; 
 }
 
+.order-status-refused {
+    color: #ff0101;
+}
+
+.order-status-confirmed {
+    color: #20c911;
+}
+

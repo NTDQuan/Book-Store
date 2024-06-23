@@ -12,9 +12,9 @@ export function authCustomerHeader() {
   const user = JSON.parse(localStorage.getItem('customer'))
   if(user && user.token) {
     return { Authorization: 'Bearer ' + user.token }
-} else {
-    return {}
-}
+  } else {
+      return {}
+  }
 }
 
 export const registerUser = async (input) => {
@@ -44,6 +44,7 @@ export const registerUser = async (input) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          ...authHeader()
         },
         body: JSON.stringify(input),
       });

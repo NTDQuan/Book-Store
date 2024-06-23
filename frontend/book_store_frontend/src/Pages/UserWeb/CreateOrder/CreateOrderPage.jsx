@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { createOrder } from '../../../service/OrderService.js';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, userNavigate } from 'react-router-dom';
 import './CreateOrderPage.css'
 
 const CreateOrderPage = (prps) => {
   const location = useLocation();
   const { totalPrice } = location.state || { totalPrice: 0 };
+  const navigate  = useNavigate();
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -30,6 +31,7 @@ const CreateOrderPage = (prps) => {
       console.log(orderData);
       const response = await createOrder(orderData);
       console.log('Order created successfully:', response);
+      navigate("/your-order")
       // Redirect or show success message
     } catch (error) {
       console.error('Error creating order:', error);
