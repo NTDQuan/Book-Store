@@ -19,6 +19,7 @@ import ProductContextProvider from "./hooks/ProductContext";
 import ProductDetailPage from "./Pages/UserWeb/Product_Detail/Product_Detail"
 import CartPage from "./Pages/UserWeb/Cart/Cart";
 import CustomerOrderList from "./Pages/UserWeb/OrderList/OrderList";
+import AdminOrderList from "./Pages/AdminPanel/OrderList/OrderList";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
                   <Route path="home" element={<AdminHomeContainer />} />
                   <Route path="staffs" element={<StaffListPage />} />
                   <Route path="customers" element={<CustomerListPage />} />
+                  <Route path="orders" element={<AdminOrderList />} />
                 </Route>
               </Route>
               <Route path="/login" element={<CustomerLoginPage />}/>

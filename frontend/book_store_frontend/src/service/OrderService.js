@@ -53,3 +53,29 @@ export const createOrder = async (orderData) => {
     throw error;
   }
 };
+
+export const confirmOrder = async (orderId) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:8080/orders/admin/confirm-order/${orderId}`,
+      {},
+      withAuthHeader({})
+    );
+    console.log('Order confirmed:', response.data);
+  } catch (error) {
+    console.error('Error confirming order:', error);
+  }
+};
+
+export const refuseOrder = async (orderId) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:8080/orders/admin/refuse-order/${orderId}`,
+      {},
+      withAuthHeader({})
+    );
+    console.log('Order refused:', response.data);
+  } catch (error) {
+    console.error('Error refusing order:', error);
+  }
+};

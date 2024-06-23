@@ -1,0 +1,111 @@
+.admin-order-list {
+    padding: 20px;
+    width: 100%;
+    height: fit-content;
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: black;
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    border-radius: 8px;
+} 
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-id {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    word-wrap: break-word; 
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-date {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    overflow-wrap: break-word;
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-item {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    word-wrap: break-word; 
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-customer {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    word-wrap: break-word; 
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-staff {
+    display: flex;
+    align-items: center;
+    width: 5%;
+    word-wrap: break-word; 
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 20%;
+    overflow-wrap: break-word;
+    padding: 10px;
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-price {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    word-wrap: break-word; 
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-price p {
+    color: #FF5858;
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-status {
+    display: flex;
+    align-items: center;
+    width: 5%;
+    word-wrap: break-word; 
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-action {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 10%;
+    word-wrap: break-word; 
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-action .confirm {
+    width: 70px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    background-color: #20c911;
+    color: white;
+}
+
+.admin-order-list .admin-order-list-container .admin-order-list-content .admin-order-list-order .admin-order-list-order-action .cancel {
+    width: 70px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    background-color: #e21010;
+    color: white;
+}
